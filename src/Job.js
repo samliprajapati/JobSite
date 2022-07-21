@@ -5,7 +5,7 @@ export default function Job() {
      
 
   useEffect(() => {
-    fetch("https://develop.tekorero.com/employeePortal/api/v1/link/recruitment/opportunity/OIG16191511577182022")
+    fetch("https://develop.tekorero.com/api/v1/recruitment/publish")
      .then(response => response.json())
 
       .then(data => setJobData(data))
