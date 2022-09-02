@@ -1,0 +1,1 @@
+export const SET_JOB_VIEW_TYPE="SET_JOB_VIEW_TYPE";
