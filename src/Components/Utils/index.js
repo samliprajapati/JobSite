@@ -6,6 +6,3 @@ export { default as CalendarInstance } from './CalendarInstance';
 export { default as TwillioDialer } from './TwilioDialer';
 export { default as TextEditor } from './TextEditor';
 export { default as OpenTripPlanner } from './OpenTripPlanner';
-export { default as CustomerHeader } from "./CustomerHeader";
-export { default as ShopprHomeActionHeader } from "./ShopprHomeActionHeader";
-export { default as ActionHeader2 } from './ActionHeader2';

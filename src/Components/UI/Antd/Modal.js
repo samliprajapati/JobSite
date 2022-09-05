@@ -17,8 +17,11 @@ const StyledModal = styled(Modal)`
           /* background-color: ${props =>
           props.theme.backgroundColor} !important; */
           color: ${props => props.theme.color};
-          padding: ${props => props.bodyPadding};
-          border-radius: ${props => props.modalBorderRadius || ""};
+         // padding: ${props => props.bodyPadding};
+         padding: "18px";
+         font-size: 13px;
+         
+         border-radius: ${props => props.modalBorderRadius || ""};
    }
     .ant-modal-footer{
         background-color: ${props => props.theme.backgroundColor} !important;

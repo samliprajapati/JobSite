@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const StyledCard = styled(Card)`
     background-color: ${props => props.theme.applicationBackground} !important;
     color: ${props => props.theme.color};
-    box-shadow: 0px 4px 10px -4px  ${props => props.theme.boxShadowColor};
+    box-shadow: 0em 0.25em 0.625em -0.25em  ${props => props.theme.boxShadowColor};
     border: none !important;
     .ant-card {
         background-color: ${props => props.theme.applicationBackground} !important;

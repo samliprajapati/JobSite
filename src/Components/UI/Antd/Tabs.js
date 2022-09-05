@@ -4,25 +4,20 @@ import styled from "styled-components";
 const StyledTabs = styled(Tabs)`
     .ant-tabs-nav-container {
         color: ${props => props.theme.color};
-        line-height:0.9;
     }
     .ant-tabs-bar {
         margin: 0.3rem;
-        line-height:0.9;
     }
     .ant-tabs-nav .ant-tabs-tab{
-        margin: 0 5px 0 0;
-        padding: 0.75em 20px;
-        line-height:0.9;
+        margin: 0 0.3125em 0 0;
+        padding: 0.75em 1.25em;
     }
     .ant-nav-container {
         color: ${props => props.theme.color};
-        box-shadow: 0 0.0625em 4px 0.0625em ${props => props.theme.boxShadowColor};
+        box-shadow: 0 0.0625em 0.25em 0.0625em ${props => props.theme.boxShadowColor};
         border: 0.0625em solid ${props => props.theme.borderColor}
-        border-radius: 0.1rem;
-        line-height:0.9;
+       // border-radius: 0.3rem;
     }
-
    
     
 `;

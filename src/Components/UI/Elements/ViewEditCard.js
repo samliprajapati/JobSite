@@ -5,11 +5,11 @@ class ViewEditCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      viewType: "view"
+      viewType: "view",
     };
   }
   toggleViewType = () => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       if (prevState.viewType === "view") {
         return { viewType: "edit" };
       } else {
@@ -19,7 +19,7 @@ class ViewEditCard extends Component {
   };
   render() {
     return (
-      <MainWrapper>
+      <MainWrapper Height={this.props.Height}>
         {this.props.children(this.state, this.toggleViewType)}
       </MainWrapper>
     );

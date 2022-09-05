@@ -27,7 +27,7 @@ const StyledCalendar = styled(Calendar)`
 const CalendarInstance = props => {
   console.log(props);
   return (
-    <div style={{ height: props.height || "500px" }}>
+    <div style={{ height: props.height || "37.25em" }}>
       <StyledCalendar
         localizer={localizer}
         defaultView={props.defaultView || "week"}

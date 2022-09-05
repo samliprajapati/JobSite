@@ -5,19 +5,19 @@ const StyledTextarea = styled.textarea.attrs({
   size: props => (props.small ? 4 : undefined),
 })`
     width: 100%;
-    min-height: 120px;
-    border-radius: 3px;
+    min-height: 7.5em;
+    border-radius: 0.1875em;
     border: 0.0625em solid gainsboro;
     background-color: ${props => props.theme.backgroundColor};
     color: ${props => props.theme.color};
     display: block;
-    margin: 0.3rem 0;
-    border-radius: 0.1rem;
+    // margin: 0.3rem 0;
+    border-radius: 0.3rem;
     outline: none;
-    box-shadow: 0px 4px 10px -4px  ${props => props.theme.boxShadowColor};
+    box-shadow: 0em 0.25em 0.625em -0.25em  ${props => props.theme.boxShadowColor};
     padding: 0.3rem 1rem;
    &:hover{
-    box-shadow: 0px 4px 10px -0.125em  ${props => props.theme.boxShadowColor};
+    box-shadow: 0em 0.25em 0.625em -0.125em  ${props => props.theme.boxShadowColor};
     border: 0.0625em solid #1890ff;
     }
     ::placeholder {

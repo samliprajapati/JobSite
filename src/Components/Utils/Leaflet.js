@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "antd";
 import L from "leaflet";
-import { Map, TileLayer } from "react-leaflet";
+import { MapLayer, Map, TileLayer, withLeaflet } from "react-leaflet";
 import "leaflet-routing-machine";
 import "leaflet/dist/leaflet.css";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
@@ -94,7 +94,7 @@ class MapContainer extends Component {
             width: width || "auto",
             height: height || "85vh",
             margin: margin || "0.125em",
-            marginTop: "8px",
+            marginTop: "0.5em",
             border: "0.0625em solid #ccc",
           }}
         >
@@ -108,13 +108,13 @@ class MapContainer extends Component {
               <Routing map={this.map} waypoints={waypoints} />
             )
           ) : (
-            <div style={{ display: "none" }}>
-              {markers &&
-                markers.map((mark, i) =>
-                  MyPopupMarker ? <MyPopupMarker key={i} mark={mark} /> : <></>
-                )}
-            </div>
-          )}
+              <div style={{ display: "none" }}>
+                {markers &&
+                  markers.map((mark, i) =>
+                    MyPopupMarker ? <MyPopupMarker key={i} mark={mark} /> : <></>
+                  )}
+              </div>
+            )}
 
           {/* {this.state.isMapInit && waypoints.length && <Routing map={this.map} waypoints={waypoints} />} */}
         </Map>
