@@ -15,14 +15,14 @@ export default function OpenTripPlanner({ address, userAddress }) {
     addressName = `${address.address1 || ""} ${address.address2 ||
       ""} ${address.street || ""} ${address.town || ""} ${address.city ||
       ""} ${address.state || ""} ${address.country ||
-      ""} ${address.pinCode || ""}`;
+      ""} ${address.postalCode || ""}`;
   }
   let userAddressName;
   if (userAddress) {
     userAddressName = `${userAddress.address1 || ""} ${userAddress.address2 ||
       ""} ${userAddress.street || ""} ${userAddress.town ||
       ""} ${userAddress.city || ""} ${userAddress.state ||
-      ""} ${userAddress.country || ""} ${userAddress.pinCode || ""}`;
+      ""} ${userAddress.country || ""} ${userAddress.postalCode || ""}`;
   }
   return (
     <OpenTripWrapper>
@@ -36,7 +36,7 @@ export default function OpenTripPlanner({ address, userAddress }) {
         value={userAddressName}
         style={{ padding: "0" }}
       />
-      <Button style={{ width: "100%", marginTop: "10px" }} type="primary">
+      <Button style={{ width: "100%", marginTop: "0.625em" }} type="primary">
         Directions
       </Button>
     </OpenTripWrapper>

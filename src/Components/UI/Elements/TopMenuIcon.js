@@ -20,7 +20,6 @@ class NotificationPopover extends Component {
     }
     render() {
         return (
-            
             <Tooltip title="Notifications">
                 <Popover
                     content={
@@ -39,7 +38,6 @@ class NotificationPopover extends Component {
                     </Badge>
                 </Popover>
             </Tooltip>
-            
         )
     }
 }

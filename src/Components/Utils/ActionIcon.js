@@ -5,7 +5,7 @@ import Tooltip from 'antd/lib/tooltip';
 import Icon from 'antd/lib/icon';
 
 const StyledIcon = styled(Icon)`
-    font-size: ${ props => props.size ? props.size : '25px'};
+    font-size: ${props => props.size ? props.size : '1.5625em'};
     cursor: pointer;
 `
 

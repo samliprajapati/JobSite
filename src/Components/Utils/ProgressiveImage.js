@@ -5,7 +5,7 @@ class ProgressiveImage extends Component {
         super(props)
         this.state = {
             currentImage: this.props.preview,
-            loading: true,
+            Loading: true,
         }
     }
     componentDidMount() {
@@ -14,38 +14,38 @@ class ProgressiveImage extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.image !== this.props.image) {
-            this.setState({ currentImage: nextProps.preview, loading: true }, () => {
+            this.setState({ currentImage: nextProps.preview, Loading: true }, () => {
                 this.fetchImage(nextProps.image)
             })
         }
     }
 
     componentWillUnmount() {
-        if (this.loadingImage) {
-            this.loadingImage.onload = null
+        if (this.LoadingImage) {
+            this.LoadingImage.onload = null
         }
     }
     fetchImage = src => {
         const image = new Image()
-        image.onload = () => this.setState({ currentImage: this.loadingImage.src, loading: false })
+        image.onload = () => this.setState({ currentImage: this.LoadingImage.src, Loading: false })
         image.src = src
-        this.loadingImage = image
+        this.LoadingImage = image
     }
 
-    style = loading => {
+    style = Loading => {
         return {
             transition: '0.5s filter linear',
-            filter: `${loading ? 'blur(20px)' : ''}`,
+            filter: `${Loading ? 'blur(1.25em)' : ''}`,
             width: this.props.width || '100%',
             height: this.props.height || '100%',
-            padding: `${loading ? '20px' : ''}`,
+            padding: `${Loading ? '1.25em' : ''}`,
             borderRadius: this.props.borderRadius || 0,
         }
     }
     render() {
-        const { currentImage, loading } = this.state
+        const { currentImage, Loading } = this.state
         const { alt } = this.props
-        return <img style={this.style(loading)} src={currentImage} alt={alt} />
+        return <img style={this.style(Loading)} src={currentImage} alt={alt} />
     }
 }
 

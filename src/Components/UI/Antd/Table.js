@@ -2,20 +2,22 @@ import React from "react";
 import { Table, Empty } from "antd";
 import styled from "styled-components";
 
-// const MyTable = () => (
-//   <Table
-//     locale={{
-//       emptyText: <Empty description={"We couldn't find relevant data"} />,
-//     }}
-//   />
-// );
+const MyTable = () => (
+  <Table
+    locale={{
+      emptyText: <Empty description={"We couldn't find relevant data"} />,
+    }}
+  />
+);
 
 const StyledTable = styled(Table)`
   color: ${(props) => props.theme.color};
   background-color: ${(props) => props.theme.backgroundColor};
   margin: ${(props) => props.theme.margin || "0.2rem"};
-  margin-top: 0.8125em;
-  e .ant-table {
+  margin-top: 13px;e
+
+
+  .ant-table {
     color: ${(props) => props.theme.color};
   }
 
@@ -25,32 +27,13 @@ const StyledTable = styled(Table)`
     font-weight: bold;
   }
   .ant-table-thead > tr > th {
-    // padding: 0.3125em 0.125em;
-    // font-size: 0.875rem;
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1em;
-    line-height: 1.2em;
-
-    text-align: center;
-
-    color: #000000;
+    padding: 0.3125em 0.125em;
+    font-size: 0.82rem;
   }
-
+  
   .ant-table-tbody > tr > td {
-    // padding: 0.3125em 0.125em;
-    // font-size: 0.82rem;
-    font-family: 'Poppins';
-font-style: normal;
-font-weight: 400;
-font-size: 0.85em;
-line-height: 1.2em;
-/* identical to box height */
-
-text-align: center;
-
-color: #1F4173;
+    padding: 0.3125em 0.125em;
+    font-size: 0.75rem;
   }
 
   .ant-table-thead > tr,
@@ -79,19 +62,19 @@ color: #1F4173;
     display: flex;
     align-items: center;
     margin: -4px -8px -4px 4px;
-    padding: 0 0.75em;
+    padding: 0 12px;
     color: tomato;
-    font-size: 0.75em;
-    border-radius: 0.125em;
+    font-size: 12px;
+    border-radius: 2px;
     cursor: pointer;
     transition: all 0.3s;
-  }
-  .ant-table-filter-trigger:hover {
-    color: tomato;
-    background: rgba(0, 0, 0, 0.04);
-  }
-  .ant-table-filter-trigger.active {
-    color: #1890ff;
-  }
+}
+.ant-table-filter-trigger:hover {
+  color: tomato;
+  background: rgba(0, 0, 0, 0.04);
+}
+.ant-table-filter-trigger.active {
+  color: #1890ff;
+}
 `;
 export default StyledTable;

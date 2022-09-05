@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 export default function Job() {
   const [jobData, setJobData] = useState([])
-     
+  // window.location.hostname
   useEffect(() => {
     fetch(`https://develop.tekorero.com/employeePortal/api/v1/recruitment/publish/website?url=dtoc.tekorero.com`)
      .then(response => response.json())

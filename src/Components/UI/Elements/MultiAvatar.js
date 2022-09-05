@@ -11,7 +11,6 @@ const MultiAvatar = ({
   imgHeight,
   smallAvatar,
   imgRadius,
-  imgPaddingTop,
   // bgcolor,
   minAvatarWidth,
 }) => {
@@ -23,51 +22,70 @@ const MultiAvatar = ({
   const borderWidth = size === "large" ? "0.0625em" : "0.0625em";
   const borderColor = size === "large" ? "#337df4" : "#337df4";
   const borderStyle = size === "large" ? "solid" : "solid";
-  console.log(imageId)
   return (
     <>
-      {imageId ? (
+      {imageId || imageURL ? (
         imageId ? (
-          <div>
+          <div style={{  }}>
             <ProgressiveImage
               preview={ProfilePreview}
               image={`${base_url}/image/${imageId}`}
-              width={imgWidth || "10em"}
-              height={imgHeight || "10em"}
-              // paddingTop={imgPaddingTop || 0}
+              width={imgWidth || "3.4375em"}
+              height={imgHeight || "3.4375em"}
               // borderRadius={imgRadius}
+              borderRadius={'1.0625em'}
             />
           </div>
         ) : (
-          <ProgressiveImage
-            preview={ProfilePreview}
-            image={imageURL}
-            width={imgWidth || "10em"}
-            height={imgHeight || "10em"}
-            // paddingTop={imgPaddingTop || 0}
-            // borderRadius={imgRadius}
-            // borderRadius={'50%'}
-          />
-        )
+            <ProgressiveImage
+              preview={ProfilePreview}
+              image={imageURL}
+              width={imgWidth || "3.4375em"}
+              height={imgHeight || "3.4375em"}
+              // borderRadius={imgRadius}
+             borderRadius={'1.0625em'}
+            />
+          )
       ) : (
-        <Avatar
-          size={size || "large"}
-          style={{
-            color,
-            // backgroundColor: bgcolor ? "red" : backgroundColor,
-            backgroundColor,
-            // fontSize,
-            borderWidth,
-            borderColor,
-            borderStyle,
-            minWidth: minAvatarWidth,
-          }}
-        >
-          {primaryTitle && primaryTitle.split("")[0].toUpperCase()}
-        </Avatar>
-      )}
+          <Avatar
+            size={size || "large"}
+            style={{
+              color,
+              // backgroundColor: bgcolor ? "red" : backgroundColor,
+              backgroundColor,
+              // fontSize,
+              borderWidth,
+              borderColor,
+              borderStyle,
+              minWidth: minAvatarWidth,
+            }}
+          >
+            {primaryTitle && primaryTitle.split("")[0].toUpperCase()}
+          </Avatar>
+        )}
     </>
   );
 };
 
 export default MultiAvatar;
+{
+  /* <Icon type="audit" />influencer */
+}
+{
+  /* <i class="material-icons">
+how_to_reg
+</i> evaluator */
+}
+
+// <i class="material-icons">
+// how_to_vote
+// </i>decision maker
+{
+  /* <i class="material-icons">
+assistant
+</i>influencer */
+}
+
+//decision maker <i class="fas fa-vote-yea"></i>
+//evaluator <i class="fas fa-address-card"></i>
+//influencer <i class="fas fa-hands-helping"></i>
