@@ -181,3 +181,49 @@ li {
   display: list-item;
   text-align: -webkit-match-parent;
 }
+
+h1 {
+
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-family: "Poppins";
+  font-size: 1.3em;
+}
+
+h2{
+ 
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 700;
+  font-family: "Poppins";
+  font-size: 1.3em;
+}
+
+h3 {
+  /* margin-top: 0;
+  margin-bottom: 0.5em; */
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-family: 'Poppins';
+  font-size:1em
+}
+
+h4 {
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-family: 'Poppins';
+  font-size:0.8em;
+}
+
+h5 {
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-family: 'Poppins';
+  font-size:0.7em;
+}
+
+h6 {
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-family: 'Poppins';
+  font-size:0.6em;
+}

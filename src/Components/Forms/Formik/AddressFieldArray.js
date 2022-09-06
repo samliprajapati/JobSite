@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, Icon, Tooltip } from "antd";
+import { Button, Tooltip } from "antd";
+import { EnvironmentOutlined } from '@ant-design/icons';
 import { Field } from "formik";
 import { FlexContainer } from "../../UI/Layout";
 import { Spacer, StyledLabel } from "../../UI/Elements";
@@ -11,31 +12,64 @@ class AddressFieldArray extends Component {
     console.log(this.props);
     const { arrayHelpers, values, singleAddress } = this.props;
     console.log(singleAddress);
+    console.log(values);
     return (
       <div>
+        <>
+          {/* {!singleAddress && (
+            <Button
+              type="primary"
+              htmlType="button"
+              onClick={() =>
+                arrayHelpers.push({
+                  addressType: "",
+                  address1: "",
+                  address2: "",
+                  town: "",
+                  street: "",
+                  city: "",
+                  state: "",
+                  postalCode: "",
+                  country: "",
+                  latitude: "",
+                  longitude: ""
+                })
+              }
+            >
+              +
+            </Button>
+          )} */}
+        </>
+
         {values &&
           values.address.map((address, index) => (
             <div>
-              <StyledLabel style={{ marginTop: "0.75em" }}>Location</StyledLabel>
-              <div key={index} 
-              //style={{ display: "flex" }}
-              >
+              {/* <StyledLabel style={{ marginTop: "0.75em" }}>Location</StyledLabel> */}
+              <div key={index} style={{ display: "flex", width: "100%", marginTop: "0.94em" }}>
+                <EnvironmentOutlined
+                  // type="environment"
+                  style={{
+                    marginTop: "0.68em",
+                    fontSize: "1.12em",
+                    marginRight: "0.68em",
+                  }}
+                />
                 <Field
                   name={`address[${index}]`}
                   // label="Location"
                   component={FormikPlacesAutoComplete}
                   isColumn
                   options={{}}
-                  style={{ height: "1.8125em", 
-                  // marginTop: "0.25em" 
-                }}
+                  style={{ height: "2em", marginTop: "0px" }}
                 />
                 {/* <FormikPlacesAutoComplete /> */}
-                <div style={{ marginTop: "0.4375em" }}>
+                &nbsp;
+                <div style={{ marginTop: "0.31em" }}>
                   {!singleAddress && (
                     <Button
                       type="primary"
                       htmlType="button"
+                      ghost
                       onClick={() =>
                         arrayHelpers.push({
                           addressType: "",
@@ -52,19 +86,20 @@ class AddressFieldArray extends Component {
                         })
                       }
                     >
-                      +
+                      <i class="fas fa-plus"></i>
                     </Button>
                   )}
                 </div>
-              
-                <div style={{ marginTop: "0.4375em" }}>
+                &nbsp;
+                <div style={{ marginTop: "0.31em" }}>
                   {!singleAddress && (
                     <Button
+                      ghost
                       type="primary"
                       htmlType="button"
                       onClick={() => arrayHelpers.remove(index)}
                     >
-                      -
+                      <i class="fas fa-minus"></i>
                     </Button>
                   )}
                 </div>
@@ -87,9 +122,19 @@ class AddressFieldArray extends Component {
                                 inlineLabel
                                 style={{ flexBasis: '80%' }}
                             /> */}
-                <Spacer style={{ marginTop: "1.25em" }} />
-                <p>Address input is only allowed using Location feature</p>
-                <Spacer style={{ marginTop: "1.25em" }} />
+                <Spacer style={{ margin: 0 }} />
+                <p
+                  style={{
+                    fontWeight: "bold",
+                    marginBottom: "0px",
+                    fontStyle: "italic",
+                    color: "#1890ff",
+                    margin: 0,
+                  }}
+                >
+                  Address input is only allowed using Location feature
+                </p>
+                <Spacer style={{ marginBottom: "0.94em" }} />
                 <Field
                   name={`address.${index}.address1`}
                   label="Address 1"
@@ -97,9 +142,7 @@ class AddressFieldArray extends Component {
                   component={InputComponent}
                   width={"100%"}
                   inlineLabel
-                  style={{  height: "1.8125em",
-                  //  marginTop: "0.25em"
-                 }}
+                  style={{ flexBasis: "80%", height: "2em", marginTop: "0px" }}
                 />
                 <Spacer />
                 {/* <Field name={`address.${index}.address2`}
@@ -113,9 +156,7 @@ class AddressFieldArray extends Component {
                   width={"100%"}
                   isColumn
                   inlineLabel
-                  style={{  height: "1.8125em", 
-                  // marginTop: "0.25em" 
-                }}
+                  style={{ flexBasis: "80%", height: "2em", marginTop: "0px" }}
                 />
                 <Spacer />
                 <FlexContainer justifyContent="space-between">
@@ -129,12 +170,38 @@ class AddressFieldArray extends Component {
                         width={"100%"}
                         isColumn
                         inlineLabel
-                         style={{
-                          height: "1.8125em",
-                               }}
+                        style={{
+                          flexBasis: "80%",
+                          height: "2em",
+                          marginTop: "0px",
+
+                        }}
                       />
                     </Tooltip>
                   </div>
+                  <div style={{ width: "47%" }}>
+                    <Tooltip title="Use Location feature for easy search ">
+                      <Field
+                        name={`address.${index}.postalCode`}
+                        label="Zip code"
+                        disabled
+                        component={InputComponent}
+                        isColumn
+                        width={"100%"}
+                        inlineLabel
+                        style={{
+                          flexBasis: "80%",
+                          height: "2em",
+                          marginTop: "0px",
+
+                        }}
+                      />
+                    </Tooltip>
+                  </div>
+                </FlexContainer>
+
+                <Spacer />
+                <FlexContainer justifyContent="space-between">
                   <div style={{ width: "47%" }}>
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
@@ -146,14 +213,15 @@ class AddressFieldArray extends Component {
                         isColumn
                         inlineLabel
                         style={{
-                            height: "1.8125em",
-                              }}
+                          flexBasis: "80%",
+                          height: "2em",
+                          marginTop: "0px",
+
+                        }}
                       />
                     </Tooltip>
                   </div>
-                </FlexContainer>
-                <Spacer />
-                <FlexContainer justifyContent="space-between">
+
                   <div style={{ width: "47%" }}>
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
@@ -165,29 +233,17 @@ class AddressFieldArray extends Component {
                         width={"100%"}
                         inlineLabel
                         style={{
-                               height: "1.8125em",
-                               }}
-                      />
-                    </Tooltip>
-                  </div>
+                          flexBasis: "80%",
+                          height: "2em",
+                          marginTop: "0px",
 
-                  <div style={{ width: "47%" }}>
-                    <Tooltip title="Use Location feature for easy search ">
-                      <Field
-                        name={`address.${index}.postalCode`}
-                        label="Pin code"
-                        disabled
-                        component={InputComponent}
-                        isColumn
-                        width={"100%"}
-                        inlineLabel
-                        style={{
-                              height: "1.8125em",
-                              }}
+                        }}
                       />
                     </Tooltip>
                   </div>
                 </FlexContainer>
+
+                <Spacer />
               </span>
             </div>
           ))}

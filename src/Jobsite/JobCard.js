@@ -14,16 +14,16 @@ export default function Job() {
       {jobData.map((item) => {
         return (
           <div className="card">
-            <div className="headLine">{item.jobOrder}</div>
-            <div className="description">{item.requirementName}</div>
+            <h4>{item.jobOrder}</h4>
+            <h3>{item.requirementName}</h3>
             <div className="mixed">
 
-              <div className="exp">{item.exp}</div>
+              <h3 className="exp">{item.exp}</h3>
               
-              <div className="location">{item.location}</div>
+              <h3 className="location">{item.location}</h3>
             </div>
             
-            <div className="description">{item.description}</div>
+            <h3 className="description">{item.description}</h3>
 
           </div>
         )
