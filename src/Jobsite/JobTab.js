@@ -21,7 +21,7 @@ function JobTab(props) {
           <TabPane
               tab={
                 <>
-                  <h3>Vaccancy</h3>
+                  <h3>Vacancy</h3>
                   &nbsp;
                   {activeKey === "1" && <></>}
                 </>

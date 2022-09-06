@@ -26,7 +26,7 @@ const JobHeaderLeft = (props) => {
             color: props.viewType === "jobcard" && "#1890ff",
           }}
         > 
-        Vaccancy
+        Vacancy
         </span>
       </Tooltip>
       &nbsp;&nbsp;

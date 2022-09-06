@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Select, Icon, Tag, Switch, Checkbox } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
-// import { FormattedMessage } from "react-intl";
 import * as Yup from "yup";
 import { Spacer } from "../Components/UI/Elements";
 import { ShowOrCollapse } from "../Components/Common";
@@ -18,6 +17,7 @@ import { FlexContainer } from "../Components/UI/Layout";
 import { TextareaComponent } from "../Components/Forms/Formik/TextareaComponent";
 import { DatePicker } from "../Components/Forms/Formik/DatePicker";
 import moment from "moment";
+import { getSectors } from "./JobAction";
 // import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
 const { Option } = Select;
 /**
@@ -116,7 +116,7 @@ class JobUploadForm extends Component {
     // const { getLibrarys,organizationId,} = this.props;
     // console.log();
     // getLibrarys(organizationId);
-    // this.props.getSectors();
+    this.props.getSectors();
     // this.props.getDepartments();
   }
 
@@ -129,17 +129,22 @@ class JobUploadForm extends Component {
     } = this.props;
 
     
-   
-
+    const sectorOption = this.props.sectors.map((item) => {
+      return {
+        label: item.sectorName||"",
+        value: item.sectorId,
+      };
+    });  
+console.log("sec",sectorOption)
     return (
       <>
         <Formik
           initialValues={{
-          //   sectorId: "",
+            sectorId: "",
           //   roleTypeId: "",
           //   workpreference:"",
           //   partnerId: "",
-          //   sectorName: "",
+            sectorName: "",
           //   partnerName: "",
           //   sectorDescription: "",
           //   currentCtc: "",
@@ -183,21 +188,21 @@ class JobUploadForm extends Component {
           //   idProof: "",
           //   idNumber: "",
           //   CostType: "",
-          //   address: [
-          //     {
-          //       addressType: "",
-          //       address1: "",
-          //       address2: "",
-          //       town: "",
-          //       street: "",
-          //       city: "",
-          //       postalCode: "",
-          //       country: this.props.user.countryName,
-          //       latitude: "",
-          //       skills:[],
-          //       longitude: "",
-          //     },
-          //   ],
+            address: [
+              {
+                addressType: "",
+                address1: "",
+                address2: "",
+                town: "",
+                street: "",
+                city: "",
+                postalCode: "",
+                country: "",
+                latitude: "",
+                skills:[],
+                longitude: "",
+              },
+            ],
           // 
         }}
           validationSchema={CandidateSchema}
@@ -241,7 +246,7 @@ class JobUploadForm extends Component {
             setFieldTouched,
           }) => (
             <Form>
-              <div style={{ display: "flex", justifyContent: "space-between",height: "70vh", overflow:"scroll",paddingRight: "0.6em" }}>
+              <div>
                 <div
                   style={{
                     height: "100%",
@@ -548,49 +553,12 @@ class JobUploadForm extends Component {
                   <FlexContainer justifyContent="space-between">
                     <div style={{ width: "47%" }}>
                       <FastField
-                        // name="department"
                         name="sectorId"
-                        // isColumnWithoutNoCreate
-                        // selectType="sectorName"
                         label="Sector"
-                        
-                      
-                        // options={[
-                        //   " Accountancy",
-                        //   " Aviation",
-                        //   " Banking",
-                        //   "Car industry ",
-                        //   "Clothing ",
-                        //   " Construction ",
-                        //   " Content generation/management ",
-                        //   " Daycare ",
-                        //   "Design",
-                        //   "Digital marketing",
-                        //   " Distributor ",
-                        //   " Finance ",
-                        //   "Furniture ",
-                        //   " Gaming ",
-                        //   "Health services ",
-                        //   "HR & Business operations ",
-                        //   "Immigration and payrolling ",
-                        //   "IT services",
-                        //   "Painting ",
-                        //   " Real-estate ",
-                        //   " Recruitment",
-                        //   "Telecommunications ",
-                        //   " Transport services ",
-                        //   "Web development ",
-                        // ]}
-                        // onChange={() => {
-                        //   this.handleFieldClik();
-                        // }}
                         isColumn
-                        // component={SearchSelect}
                         component={SelectComponent}
-                        options={[
-                             " Accountancy",
-                            " Aviation"]}
-                        // options={Array.isArray(sectorOption) ? sectorOption : []}
+                        // options={[" Accountancy"," Aviation"]}
+                        options={Array.isArray(sectorOption) ? sectorOption : []}
                        
 
                       />
@@ -726,32 +694,7 @@ class JobUploadForm extends Component {
                   
                   
                   <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "47%" }}>
-                      <FastField
-                        name="partnerId"
-                        isColumnWithoutNoCreate
-                        label="Vendor"
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.vendor"
-                        //     defaultMessage="Vendor"
-                        //   />
-                        // }
-                        isColumn
-                        // margintop={"0em"}
-                        selectType="partnerListName"
-                        // component={SearchSelect}
-                        component={InputComponent}
-                        // defaultValue={{
-                        //   value: "Chin",
-                        // }}
-                        // defaultValue={{
-                        //   value: this.props.user.countryName,
-                        // }}
-                        // value={values.countryName}
-                        inlineLabel
-                      />
-                    </div>
+                 
                     <div style={{ width: "47%" }}>
                       <FastField
                         name="designationTypeId"
@@ -788,7 +731,7 @@ class JobUploadForm extends Component {
                         <Field
                           name="tag_with_company"
                           // selectType="customerList"
-                          label="Tag Company"
+                          label="Current Employer"
                           // label={
                           //   <FormattedMessage
                           //     id="company"
@@ -946,15 +889,15 @@ class JobUploadForm extends Component {
                     <FlexContainer >
                     <FlexContainer justifyContent="space-between">
                       
-<StyledLabel >Requirement Type</StyledLabel>
+<StyledLabel >Applying for</StyledLabel>
 </FlexContainer>
 <FlexContainer justifyContent="space-between">
 <Switch  
   checked={this.state.whiteblue}
   onChange={this.handleWhiteBlue}
   disabled={this.state.checked}
-  checkedChildren="White"
-  unCheckedChildren="Blue"
+  checkedChildren="White collar"
+  unCheckedChildren="Blue collar"
 />
 <Checkbox
   checked={this.state.checked}
@@ -966,7 +909,7 @@ class JobUploadForm extends Component {
                     </FlexContainer>
                     <Spacer style={{ marginTop: "1em" }} />
                     <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                    {/* <div style={{ width: "47%" }}>
                     <FlexContainer justifyContent="space-between">
                       <StyledLabel >Active</StyledLabel>                     
                       <Switch                                              
@@ -977,7 +920,7 @@ class JobUploadForm extends Component {
                         unCheckedChildren="No"
                       />
                       </FlexContainer>
-                      </div>
+                      </div> */}
                      
                       <div style={{ width: "47%" }}>
                       <FlexContainer justifyContent="space-between">
@@ -1191,114 +1134,16 @@ class JobUploadForm extends Component {
                   </FlexContainer>
                   {/* )} */}
                   <Spacer style={{ marginTop: "1.56em" }} />
-                  <Field
-                    name="address[0].address1"
-                    label="Address"
-                    // label={
-                    //   <FormattedMessage
-                    //     id="app.address[0].address1"
-                    //     defaultMessage="Address"
-                    //   />
-                    // }
-                    component={InputComponent}
-                    isColumn
-                    width="100%"
+                  <FieldArray
+                    name="address"
+                    render={(arrayHelpers) => (
+                      <AddressFieldArray
+                        singleAddress
+                        arrayHelpers={arrayHelpers}
+                        values={values}
+                      />
+                    )}
                   />
-                  <Spacer />
-                  <Field
-                    name="address[0].street"
-                    label="Street"
-
-                    // label={
-                    //   <FormattedMessage
-                    //     id="app.street"
-                    //     defaultMessage="Street"
-                    //   />
-                    // }
-                    component={InputComponent}
-                    isColumn
-                    width="100%"
-                  />
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="address[0].city"
-                        //label="City"
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.ddress[0].city"
-                        //     defaultMessage="City"
-                        //   />
-                        // }
-                        component={InputComponent}
-                        isColumn
-                        width="100%"
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        // name="address[0].country"
-                        name="country"
-                        isColumnWithoutNoCreate
-                        label="Country"
-
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.country"
-                        //     defaultMessage="Country"
-                        //   />
-                        // }
-                        component={InputComponent}
-                        // component={SearchSelect}
-                        // defaultValue={{
-                        //   value: this.props.user.countryName,
-                        // }}
-                        // value={values.countryName}
-                        selectType="country"
-                        inlineLabel
-                        // style={{ flexBasis: "80%" }}
-                        isColumn
-                        width="100%"
-                      />
-                    </div>
-                  </FlexContainer>
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="address[0].state"
-                        label="State"
-
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.address[0].State"
-                        //     defaultMessage="State"
-                        //   />
-                        // }
-                        component={InputComponent}
-                        isColumn
-                        width="100%"
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="address[0].postalCode"
-                        label="Zip Code"
-
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.address[0].postalCode"
-                        //     defaultMessage="Pin Code"
-                        //   />
-                        // }
-                        component={InputComponent}
-                        isColumn
-                        width="100%"
-                      />
-                    </div>
-                  </FlexContainer>                
-                 
                 </div>
               </div>
 
@@ -1325,13 +1170,13 @@ class JobUploadForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, candidate,departments,sector, librarys,team, opportunity }) => ({
+const mapStateToProps = ({ auth, job}) => ({
   // token: auth.token,
   // opportunityId: opportunity.opportunity.opportunityId,
   // contact: contact.contact,
   // addingCandidate: candidate.addingCandidate,
   // resumeForm: candidate.resumeForm,
-  // sectors: sector.sectors,
+  sectors: job.sectors,
   // organizationId: auth.userDetails.organizationId,
   // addingCandidateError: candidate.addingCandidateError,
   // fetchingcontacts: contact.fetchingcontacts,
@@ -1365,7 +1210,7 @@ const mapDispatchToProps = (dispatch) =>
       // getContacts,
       // addCandidate,
       // getLibrarys,
-      // getSectors,
+      getSectors,
       // getDepartments
       // getAllPartnerListByUserId,
       // getContactById,
