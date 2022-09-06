@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { Button, Select, Icon, Tag, Switch, Checkbox } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { Spacer } from "../Components/UI/Elements";
+import { MainWrapper, Spacer } from "../Components/UI/Elements";
 import { ShowOrCollapse } from "../Components/Common";
 import SearchSelect from "../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../Components/Forms/Formik/AddressFieldArray";
@@ -246,14 +246,8 @@ console.log("sec",sectorOption)
             setFieldTouched,
           }) => (
             <Form>
-              <div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                   
-                  }}
-                >
+              <MainWrapper style={{width:"60%", margin:"auto"}}>
+                <div>
                   <FlexContainer flexWrap="no-wrap">
                     <FastField name="imageId" component={Upload} />
                     <div>
@@ -1145,20 +1139,18 @@ console.log("sec",sectorOption)
                     )}
                   />
                 </div>
-              </div>
+              </MainWrapper>
 
               <Spacer style={{ marginTop: "1.25em" }} />
 
 
-              <FlexContainer justifyContent="flex-end">
+              <FlexContainer justifyContent="center">
                 <Button
                   type="primary"
                   htmlType="submit"
                   // icon={<PoweroffOutlined />}
                   Loading={addingCandidate}
-                >
-                  {/* <FormattedMessage id="app.create" defaultMessage="Create" /> */}
-                                      
+                >                 
                     Create
                 </Button>
               </FlexContainer>
