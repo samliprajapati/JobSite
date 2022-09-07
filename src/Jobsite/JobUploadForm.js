@@ -10,14 +10,13 @@ import SearchSelect from "../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../Components/Forms/Formik/SelectComponent";
-// import { addCandidate } from "../CandidateAction";
 import Upload from "../Components/Forms/Formik/Upload";
 import { StyledLabel } from "../Components/UI/Elements";
 import { FlexContainer } from "../Components/UI/Layout";
 import { TextareaComponent } from "../Components/Forms/Formik/TextareaComponent";
 import { DatePicker } from "../Components/Forms/Formik/DatePicker";
 import moment from "moment";
-import { getSectors } from "./JobAction";
+import { addCandidate,getSectors } from "./JobAction";
 // import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
 const { Option } = Select;
 /**
@@ -141,53 +140,53 @@ console.log("sec",sectorOption)
         <Formik
           initialValues={{
             sectorId: "",
-          //   roleTypeId: "",
-          //   workpreference:"",
-          //   partnerId: "",
+            roleTypeId: "",
+            workpreference:"",
+            partnerId: "",
             sectorName: "",
-          //   partnerName: "",
-          //   sectorDescription: "",
-          //   currentCtc: "",
-          //   salutation: "",
-          //   firstName: "",
-          //   middleName: "",
-          //   lastName: "",
-          //   noticeDetail: "",
-          //   definationId:[],
-          //   countryDialCode: this.props.user.countryDialCode,
-          //   phoneNumber: "",
-          //   // mobileNumber: "", phoneNumbers
-          //   mobileNumber: this.props.responseData&&this.props.responseData.phoneNumbers.length  ?  this.props.responseData.phoneNumbers[0] : "",
-          //   countryDialCode1: this.props.user.countryDialCode,
-          //   emailId: this.props.responseData ? this.props.responseData.emails.length && this.props.responseData.emails[0] : "",
-          //   documentId: this.props.resumeForm.length && this.props.resumeForm ? this.props.resumeForm.length && this.props.resumeForm : "",
-          //   // emailId:"", 
-          //   // designation: "",
-          //    linkedin: this.props.responseData&&this.props.responseData.hasOwnProperty("linkedInProfile") ? this.props.responseData.linkedInProfile: "",
-          //   designationTypeId: "",
-          //   departmentId:"",
-          //   countryDialCode1:"",
-          //   phoneNumber:"",
-          //   notes: "",
-          //   country: this.props.user.country,
-          //   availableDate: availableDate || moment(),
-          //   benifit: "",
-          //   tag_with_company: "",
-          //   billing: 0,
-          //   noticeDetail: "",
-          //   currency: this.props.user.currency,
-          //   userId: this.props.userId,
-          //   active: this.state.availability ? "true" : "false",
-          //   worktype: this.state.billing ? "Permanent" : "Contract",
-          //   whatsapp: this.state.whatsapp ? "Different" : "Same",
-          //   category: this.state.checked ? "Both" : this.state.whiteblue ? "White" : "Blue",
-          //   // startDate: moment(),
-          //   dateOfBirth: moment(),
-          //   gender: "",
-          //   nationality: this.props.user.countryName,
-          //   idProof: "",
-          //   idNumber: "",
-          //   CostType: "",
+            partnerName: "",
+            sectorDescription: "",
+            currentCtc: "",
+            salutation: "",
+            firstName: "",
+            middleName: "",
+            lastName: "",
+            noticeDetail: "",
+            definationId:[],
+            countryDialCode: "",
+            phoneNumber: "",
+            // mobileNumber: "", phoneNumbers
+            mobileNumber: "",
+            countryDialCode1: "",
+            emailId: "",
+            documentId:  "",
+            // emailId:"", 
+            // designation: "",
+             linkedin:"",
+            designationTypeId: "",
+            departmentId:"",
+            countryDialCode1:"",
+            phoneNumber:"",
+            notes: "",
+            country:"",
+            availableDate: availableDate || moment(),
+            benifit: "",
+            tag_with_company: "",
+            billing: 0,
+            noticeDetail: "",
+            currency: "",
+            // userId: ,
+            active: true,
+            worktype: this.state.billing ? "Permanent" : "Contract",
+            whatsapp: this.state.whatsapp ? "Different" : "Same",
+            category: this.state.checked ? "Both" : this.state.whiteblue ? "White" : "Blue",
+            // startDate: moment(),
+            dateOfBirth: moment(),
+            gender: "",
+            nationality: "",
+            idProof: "",
+            idNumber: "",
+            CostType: "",
             address: [
               {
                 addressType: "",
@@ -210,9 +209,9 @@ console.log("sec",sectorOption)
             // console.log(values,this.props.responseData&&this.props.responseData.phoneNumbers.length  ?  this.props.responseData.phoneNumbers[0] : "",);
 
           
-            // addCandidate(
-            //   {
-            //     ...values,
+            addCandidate(
+              {
+                ...values,
             //     // skills: this.props.responseData ? this.props.responseData.skills : [],
             //     skills:this.props.responseData ? this.props.responseData.skills.concat(values.skills):values.skills||[],
             //     mobileNumber:values.mobileNumber,
@@ -231,10 +230,10 @@ console.log("sec",sectorOption)
             //     availableDate: moment(values.availableDate).toISOString(),
             //     // availableDate: `${newavailableDate}T00:00:00Z`,
 
-            //   },
-            //   this.props.userId,
-            //   () => this.handleReset(resetForm)
-            // );
+              },
+           
+              () => this.handleReset(resetForm)
+            );
           }}
         >
           {({
@@ -246,41 +245,28 @@ console.log("sec",sectorOption)
             setFieldTouched,
           }) => (
             <Form>
-              <MainWrapper style={{width:"60%", margin:"auto"}}>
+              <MainWrapper style={{width:"50%", margin:"auto"}}>
                 <div>
                   <FlexContainer flexWrap="no-wrap">
                     <FastField name="imageId" component={Upload} />
-                    <div>
+                    <div style={{width:"83%"}}>
                       <FlexContainer justifyContent="space-between">
-                        <div style={{ width: "35%" }}>
+                        <div style={{ width: "40%" }}>
                           <FastField
                             name="salutation"
                             type="text"
                             label="Salutation"
-                            // label={
-                            //   <FormattedMessage
-                            //     id="app.salutation"
-                            //     defaultMessage="Salutation"
-                            //   />
-                            // }
                             options={["Mr.", "Ms.", "None"]}
                             component={SelectComponent}
                             inlineLabel
-                            className="field"
                             isColumn
                           />
                         </div>
-                        <div style={{ width: "63%" }}>
+                        <div style={{ width: "55%" }}>
                           <FastField
                             isRequired
                             name="firstName"
                             label="First Name"
-                            // label={
-                            //   <FormattedMessage
-                            //     id="app.firstName"
-                            //     defaultMessage="First Name"
-                            //   />
-                            // }
                             type="text"
                             width={"100%"}
                             isColumn
@@ -503,13 +489,8 @@ console.log("sec",sectorOption)
                     <div style={{ width: "47%" }}>
                       <FastField
                         name="idProof"
-                        label="Mobile #"
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.idproof"
-                        //     defaultMessage="ID Proof"
-                        //   />
-                        // }
+                        label="ID Proof"
+                       
                         isColumn
                         // margintop={"0em"}
                         options={[
@@ -766,13 +747,8 @@ console.log("sec",sectorOption)
                       <Field
                         name="dateOfBirth"
                         label="Date of Birth"
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.dateOfBirth"
-                        //     defaultMessage="Date of Birth"
-                        //   />
-                        // }
                         isColumn
+                        isColumnWithoutNoCreate
                         component={DatePicker}
                         value={values.dateOfBirth}
                       // defaultValue={moment("2020-01-01")}
@@ -806,12 +782,6 @@ console.log("sec",sectorOption)
                         name="gender"
                         type="text"
                         label="Gender"
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.gender"
-                        //     defaultMessage="Gender"
-                        //   />
-                        // }
                         options={["Male", "Female", "Others"]}
                         component={SelectComponent}
                         inlineLabel
@@ -822,12 +792,7 @@ console.log("sec",sectorOption)
                   </FlexContainer> 
                 </div>
                 &nbsp;
-                <div
-                  style={{
-                    height: "70%",
-                    width: "45%",
-                  }}
-                >
+                <div>
                   {/* {this.props.responseData && (
                     <>
                       <StyledLabel>Skill set</StyledLabel>
@@ -1151,7 +1116,7 @@ console.log("sec",sectorOption)
                   // icon={<PoweroffOutlined />}
                   Loading={addingCandidate}
                 >                 
-                    Create
+                   Apply
                 </Button>
               </FlexContainer>
             </Form>
@@ -1166,7 +1131,7 @@ const mapStateToProps = ({ auth, job}) => ({
   // token: auth.token,
   // opportunityId: opportunity.opportunity.opportunityId,
   // contact: contact.contact,
-  // addingCandidate: candidate.addingCandidate,
+  addingCandidate: job.addingCandidate,
   // resumeForm: candidate.resumeForm,
   sectors: job.sectors,
   // organizationId: auth.userDetails.organizationId,
@@ -1200,7 +1165,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       // getContacts,
-      // addCandidate,
+      addCandidate,
       // getLibrarys,
       getSectors,
       // getDepartments
