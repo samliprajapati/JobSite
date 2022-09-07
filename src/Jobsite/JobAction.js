@@ -30,3 +30,25 @@ export const setJobViewType = (viewType) => (dispatch) =>
         });
       });
   };
+
+  export const addCandidate = (data) => (dispatch) => {
+    dispatch({
+      type: types.ADD_CANDIDATE_REQUEST,
+    });
+    axios
+      .post(`${base_url}/candidate/website?url=dtoc.tekorero.com`, data,{ 
+      })
+      .then((res) => {
+          dispatch({
+            type: types.ADD_CANDIDATE_SUCCESS,
+            payload: res.data,
+          });
+        })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_CANDIDATE_FAILURE,
+          payload: err,
+        });
+      });
+  };
