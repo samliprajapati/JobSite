@@ -31,7 +31,7 @@ export const setJobViewType = (viewType) => (dispatch) =>
       });
   };
 
-  export const addCandidate = (data) => (dispatch) => {
+  export const addCandidate = (data,cb) => (dispatch) => {
     dispatch({
       type: types.ADD_CANDIDATE_REQUEST,
     });
@@ -43,6 +43,7 @@ export const setJobViewType = (viewType) => (dispatch) =>
             type: types.ADD_CANDIDATE_SUCCESS,
             payload: res.data,
           });
+          cb && cb();
         })
       .catch((err) => {
         console.log(err);
@@ -50,5 +51,6 @@ export const setJobViewType = (viewType) => (dispatch) =>
           type: types.ADD_CANDIDATE_FAILURE,
           payload: err,
         });
+        cb && cb();
       });
   };
