@@ -8,6 +8,8 @@ const initialState = {
   fetchingSectorsError: false,
   sectors: [],
 
+  addingCandidate: false,
+  addingCandidateError: false,
 };
 
 export const jobReducer = (state = initialState, action) => {
@@ -30,7 +32,12 @@ export const jobReducer = (state = initialState, action) => {
           fetchingSectorsError: true,
         };
         
-        
+        case types.ADD_CANDIDATE_REQUEST:
+          return { ...state, addingCandidate: true };
+        case types.ADD_CANDIDATE_SUCCESS:
+          return { ...state, addingCandidate: false,  };
+        case types.ADD_CANDIDATE_FAILURE:
+       return { ...state, addingCandidate: false,  addingCandidateError: true,  };        
 
 
     default:
