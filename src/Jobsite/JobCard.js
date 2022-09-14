@@ -9,9 +9,26 @@ export default function Job() {
      .then(response => response.json())
       .then(data => setJobData(data))
   }, [])
+  // People.sort(dynamicSort("Name"));
+
+  const data=jobData.sort((a, b) => {
+    const indA = a.pingInd; 
+    const indB = b.pingInd; 
+    if (indA < indB) {
+      return 1;
+    }
+    if (indA > indB) {
+      return -1;
+    }
+  
+    // ind must be equal
+    return 0;
+  });
+  
+ console.log(data)
   return (
     <React.Fragment>
-      {jobData.map((item) => {
+      {data.map((item) => {
         return (
           <div className="card">
             <h4>{item.jobOrder}</h4>
