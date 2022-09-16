@@ -49,7 +49,7 @@ function Job(props) {
               type="primary"
               htmlType="submit"
               className="aply"
-              onClick={() => handleCandidateApplyModal(true)}
+              onClick={() => props.handleCandidateApplyModal(true)}
              
             >
               Apply

@@ -16,7 +16,7 @@ import { FlexContainer } from "../Components/UI/Layout";
 import { TextareaComponent } from "../Components/Forms/Formik/TextareaComponent";
 import { DatePicker } from "../Components/Forms/Formik/DatePicker";
 import moment from "moment";
-import { addCandidate,getSectors } from "./JobAction";
+import { addCandidate,getSectors,getLibrarys,getIdProofs } from "./JobAction";
 import { DaysCompressorWithMonth } from "./DaysCompressorWithMonth";
 // import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
 const { Option } = Select;
@@ -129,8 +129,9 @@ class JobUploadForm extends Component {
   componentDidMount() {
     // const { getLibrarys,organizationId,} = this.props;
     // console.log();
-    // getLibrarys(organizationId);
+    this.props.getLibrarys();
     this.props.getSectors();
+    this.props.getIdProofs();
     // this.props.getDepartments();
   }
 
@@ -142,14 +143,25 @@ class JobUploadForm extends Component {
       availableDate,
     } = this.props;
 
-const r="Remote" 
     const sectorOption = this.props.sectors.map((item) => {
       return {
         label: item.sectorName||"",
         value: item.sectorId,
       };
     });  
-console.log("sec",sectorOption)
+    const libraryOption = this.props.librarys.map((item) => {
+      return {
+        label: item.name || "",
+        value: item.name,
+      };
+    });
+    const IdProofOption = this.props.idProofs.map((item) => {
+      return {
+        label: item.name || "",
+        value: item.name,
+      };
+    });
+// console.log("sec",sectorOption)
     return (
       <>
         <Formik
@@ -496,19 +508,9 @@ console.log("sec",sectorOption)
                       <FastField
                         name="idProof"
                         label="ID Proof"
-                       
                         isColumn
-                        // margintop={"0em"}
-                        options={[
-                          "PassPort",
-                          "ID Card",
-                        ]}
-
                         component={SelectComponent}
-                        // defaultValue={{
-                        //   value: this.props.user.countryDialCode,
-                        // }}
-                        // value={values.countryDialCode}
+                        options={Array.isArray(IdProofOption) ? IdProofOption : []}
                         inlineLabel
                       />
                     </div>
@@ -794,14 +796,11 @@ console.log("sec",sectorOption)
                     <Field
                     name="skills"
                     label="Skills"
-                  mode
+                    mode
                     placeholder="Select"
                     width={"100%"}
                    component={SelectComponent}
-                   options={[
-                    " Accountancy",
-                   " Aviation"]} 
-                    // options={Array.isArray(libraryOption) ? libraryOption : []}   
+                    options={Array.isArray(libraryOption) ? libraryOption : []}   
                   />
                   </div>
                   </FlexContainer> 
@@ -1074,12 +1073,10 @@ console.log("sec",sectorOption)
 }
 
 const mapStateToProps = ({ auth, job}) => ({
-  // token: auth.token,
-  // opportunityId: opportunity.opportunity.opportunityId,
-  // contact: contact.contact,
   addingCandidate: job.addingCandidate,
-  // resumeForm: candidate.resumeForm,
   sectors: job.sectors,
+  librarys: job.librarys,
+  idProofs:job.idProofs,
   // organizationId: auth.userDetails.organizationId,
   // addingCandidateError: candidate.addingCandidateError,
   // fetchingcontacts: contact.fetchingcontacts,
@@ -1103,7 +1100,7 @@ const mapStateToProps = ({ auth, job}) => ({
   //   opportunity.opportunity.metaData.account &&
   //   opportunity.opportunity.metaData.account.accountId,
   // currencies: auth.currencies,
-  // librarys: librarys.librarys,
+  
   // departments: departments.departments,
 });
 
@@ -1112,8 +1109,9 @@ const mapDispatchToProps = (dispatch) =>
     {
       // getContacts,
       addCandidate,
-      // getLibrarys,
+      getLibrarys,
       getSectors,
+      getIdProofs,
       // getDepartments
       // getAllPartnerListByUserId,
       // getContactById,
