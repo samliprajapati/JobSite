@@ -156,7 +156,7 @@ console.log("sec",sectorOption)
           initialValues={{
             sectorId: "",
             roleTypeId: "",
-            // workpreference:"",
+            workpreference:"Remote",
             partnerId: "",
             sectorName: "",
             partnerName: "",
@@ -354,7 +354,6 @@ console.log("sec",sectorOption)
                     "Remote",
                     "Hybrid",
                     "Office"]}
-                   defaultValue={r}
                    isColumn
                    />
                       {/* <Field
@@ -376,18 +375,13 @@ console.log("sec",sectorOption)
                     </div>
                   </FlexContainer>
                   <Spacer/>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "29%" }}>
+                  <FlexContainer style={{justifyContent:"space-between",width:"45%"}}>
+                    <div style={{ width: "20%" }}>
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
                         label="Mobile #"
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.countryDialCode"
-                        //     defaultMessage="Mobile #"
-                        //   />
-                        // }
+                        width={"100%"}
                         isColumn
                         // margintop={"0em"}
                         selectType="dialCode"
@@ -404,7 +398,7 @@ console.log("sec",sectorOption)
                         inlineLabel
                       />
                     </div>
-                    <div style={{ width: "40%", }}>
+                    <div style={{ width: "45%", }}>
                       <FastField
                         type="text"
                         name="mobileNumber"
@@ -424,8 +418,8 @@ console.log("sec",sectorOption)
                     </div>
                     <div
                       style={{
-                        width: "14%",
-                        fontWeight: "bold",
+                        width: "10%",
+                        // fontWeight: "bold",
                       }}
                     >
                       WhatsApp
@@ -758,7 +752,7 @@ console.log("sec",sectorOption)
                     <div style={{ width: "47%"}}>
                       <Field
                         name="dateOfBirth"
-                        label="Month"
+                        label="Date of Birth"
                         isColumn
                         isColumnWithoutNoCreate
                         component={SelectComponent}

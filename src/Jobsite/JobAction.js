@@ -54,3 +54,10 @@ export const setJobViewType = (viewType) => (dispatch) =>
         cb && cb();
       });
   };
+
+  export const handleCandidateApplyModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CANDIDATE_APPLY_MODAL,
+      payload: modalProps,
+    });
+  };
