@@ -10,6 +10,8 @@ const initialState = {
 
   addingCandidate: false,
   addingCandidateError: false,
+
+  addCandidateApply: false,
 };
 
 export const jobReducer = (state = initialState, action) => {
@@ -39,6 +41,8 @@ export const jobReducer = (state = initialState, action) => {
         case types.ADD_CANDIDATE_FAILURE:
        return { ...state, addingCandidate: false,  addingCandidateError: true,  };        
 
+       case types.HANDLE_CANDIDATE_APPLY_MODAL:
+        return { ...state, addCandidateApply: action.payload };
 
     default:
       return state;
