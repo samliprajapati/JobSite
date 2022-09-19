@@ -147,7 +147,7 @@ export const getRoles = () => (dispatch) => {
     type: types.GET_ROLES_REQUEST,
   });
   axios
-    .get(`${base_url}/roleType/`,)
+    .get(`${base_url}/roleType/website?url=dtoc.tekorero.com`,)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -159,6 +159,50 @@ export const getRoles = () => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_ROLES_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getCurrency = () => (dispatch) => {
+  dispatch({
+    type: types.GET_CURRENCY_REQUEST,
+  });
+  axios
+    .get(`${base_url}/currencies/website?url=dtoc.tekorero.com`)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CURRENCY_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_CURRENCY_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getCountries = () => (dispatch) => {
+  dispatch({
+    type: types.GET_COUNTRIES_REQUEST,
+  });
+  axios
+    .get(`${base_url}/countries/website?url=dtoc.tekorero.com`)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_COUNTRIES_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_COUNTRIES_FAILURE,
         payload: err,
       });
     });

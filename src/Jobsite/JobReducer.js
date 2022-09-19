@@ -28,6 +28,18 @@ const initialState = {
   fetchingDepartments: false,
   fetchingDepartmentsError: false,
   departments: [],
+
+  fetchingRoles: false,
+  fetchingRolesError: false,
+  roles: [],
+
+  fetchingCurrency: false,
+  fetchingCurrencyError: false,
+  currencies: [],
+
+  fetchingCountries: false,
+  fetchingCountriesError: false,
+  countries: [],
 };
 
 export const jobReducer = (state = initialState, action) => {
@@ -88,13 +100,48 @@ export const jobReducer = (state = initialState, action) => {
         fetchingDesignations: false,
         fetchingDesignationsError: true,
       };
-    
-      case types.GET_DEPARTMENTS_REQUEST:
-        return { ...state, fetchingDepartments: true };
-      case types.GET_DEPARTMENTS_SUCCESS:
-        return { ...state, fetchingDepartments: false, departments: action.payload };
-      case types.GET_DEPARTMENTS_FAILURE:
-        return { ...state, fetchingDepartments: false, fetchingDepartmentsError: true };
+
+    case types.GET_DEPARTMENTS_REQUEST:
+      return { ...state, fetchingDepartments: true };
+    case types.GET_DEPARTMENTS_SUCCESS:
+      return {
+        ...state,
+        fetchingDepartments: false,
+        departments: action.payload,
+      };
+    case types.GET_DEPARTMENTS_FAILURE:
+      return {
+        ...state,
+        fetchingDepartments: false,
+        fetchingDepartmentsError: true,
+      };
+
+    case types.GET_ROLES_REQUEST:
+      return { ...state, fetchingRoles: true };
+    case types.GET_ROLES_SUCCESS:
+      return { ...state, fetchingRoles: false, roles: action.payload };
+    case types.GET_ROLES_FAILURE:
+      return { ...state, fetchingRoles: false, fetchingRolesError: true };
+
+      case types.GET_CURRENCY_REQUEST:
+        return { ...state, fetchingCurrency: true };
+      case types.GET_CURRENCY_SUCCESS:
+        return { ...state, fetchingCurrency: false, currencies: action.payload };
+      case types.GET_CURRENCY_FAILURE:
+        return {
+          ...state,
+          fetchingCurrency: false,
+          fetchingCurrencyError: true,
+        };
+
+        case types.GET_COUNTRIES_SUCCESS:
+          return { ...state, fetchingCountries: false, countries: action.payload };
+        case types.GET_COUNTRIES_FAILURE:
+          return {
+            ...state,
+            fetchingCountries: false,
+            fetchingCountriesError: true,
+          };
 
     default:
       return state;

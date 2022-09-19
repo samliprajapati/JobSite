@@ -5,7 +5,7 @@ import { StyledCreatable, StyledLabel } from "../../UI/Elements";
 import { FlexContainer } from "../../UI/Layout";
 import { functions, get, uniqBy } from "lodash";
 import ValidationError from "../../UI/Elements/ValidationError";
-import {getDesignations} from "../../../Jobsite/JobAction";
+import {getDesignations,getRoles,getCurrency,getCountries} from "../../../Jobsite/JobAction";
 // // import { candidateReducer } from "../../../Containers/Candidate/CandidateReducer";
 // // import { getTasks } from "../../../Containers/Settings/Task/TaskAction";
 // // import { getExpenses } from "../../../Containers/Settings/Expense/ExpenseAction";
@@ -17,26 +17,23 @@ class SearchSelect extends Component {
   componentDidMount() {
     // const id = "PRIN8195435358122020" = this.props;
     const {
-      getSectors,
+      getCurrency,
       getRoles,
       getDesignations,
       selectType,
+      getCountries
     } = this.props;
 
 
-
-
-//     // if (selectType === "department") {
-//     //   getDepartment();
-//     // }
-
-//     // if (selectType === "sectorName") {
-//     //   getSectors();
-//     // }
-
-//     // if (selectType === "roleType") {
-//     //   getRoles(organizationId);
-//     // }
+if (selectType === "country" || "dialCode") {
+  getCountries();
+}
+if (selectType === "currencyName") {
+  getCurrency();
+}
+    if (selectType === "roleType") {
+      getRoles();
+    }
 
     if (selectType === "designationType") {
       getDesignations();
@@ -115,7 +112,7 @@ class SearchSelect extends Component {
 //       sectors,
     job,
       designations,
-//       roles,
+      roles,
 isColumnWithoutNoCreate,
       timeZone,
       level,
@@ -165,42 +162,39 @@ isColumnWithoutNoCreate,
 //     //       color: "#FF8B00",
 //     //     }));
 
-//     // if (selectType === "country") {
-//     //   debugger;
-//     //   options = countries.map((item, i) => ({
-//     //     value: item.countryAlpha3Code,
-//     //     label: item.countryName,
-//     //     flag: item.countryFlag,
-//     //     countryDialCode: item.countryDialCode,
-//     //     countryCurrencyCode: item.countryCurrencyCode,
-//     //     latitude: Number(item.latitude),
-//     //     longitude: Number(item.longitude),
-//     //     color: "#FF8B00",
-//     //   }));
+    if (selectType === "country") {
+      debugger;
+      options = countries.map((item, i) => ({
+        value: item.countryAlpha3Code,
+        label: item.countryName,
+        flag: item.countryFlag,
+        countryDialCode: item.countryDialCode,
+        countryCurrencyCode: item.countryCurrencyCode,
+        latitude: Number(item.latitude),
+        longitude: Number(item.longitude),
+        color: "#FF8B00",
+      }));
+    }
+    
+    if (selectType === "currencyName") {
+      debugger;
+      options = currencies
 
-//     //   // const customOption = ({ label, value }) => <h3>{`${label}-----${value}`}</h3>
-//     // }
-//     // if (selectType === "currencyName") {
-//     //   debugger;
-//     //   options = currencies
-
-//     //     .map((item, i) => ({
-//     //       value: item.currencyName,
-//     //       label: item.currencyName,
-//     //       color: "#FF8B00",
-//     //     }));
-//     // }
+        .map((item, i) => ({
+          value: item.currencyName,
+          label: item.currencyName,
+          color: "#FF8B00",
+        }));
+    }
 
 
-//     // if (selectType === "dialCode") {
-//     //   options = countries.map((item, i) => ({
-//     //     label: `+${item.countryDialCode}`,
-//     //     value: `+${item.countryDialCode}`,
-//     //   }));
-//     //   // options.filter((item, i) => options.indexOf())
-//     //   options = uniqBy(options, "value");
-//     //   // const customOption = ({ label, value }) => <h3>{`${label}-----${value}`}</h3>
-//     // }
+    if (selectType === "dialCode") {
+      options = countries.map((item, i) => ({
+        label: `+${item.countryDialCode}`,
+        value: `+${item.countryDialCode}`,
+      }));
+      options = uniqBy(options, "value");
+    }
 //     // if (selectType === "timeZone") {
 //     //   options = timeZone.map((item, i) => ({
 //     //     label: `${item.zone_name}`,
@@ -233,18 +227,16 @@ isColumnWithoutNoCreate,
           color: "#FF8B00",
         }));
     }
-//     // if (selectType === "roleType") {
-//     //   debugger;
-//     //   options = roles
-//     //     // .sort((a, b) => (a.sourceName < b.sourceName ? -1 : 1))
-//     //     .map((item, i) => ({
-//     //       value: item.roleTypeId,
-//     //       label: item.roleType,
-//     //       color: "#FF8B00",
-//     //     }));
-
-//     //   // const customOption = ({ label, value }) => <h3>{`${label}----${value}`}</h3>
-//     // }
+    if (selectType === "roleType") {
+      debugger;
+      options = roles
+        // .sort((a, b) => (a.sourceName < b.sourceName ? -1 : 1))
+        .map((item, i) => ({
+          value: item.roleTypeId,
+          label: item.roleType,
+          color: "#FF8B00",
+        }));
+    }
 
 //     // if (selectType === "educationType") {
 //     //   debugger;
@@ -362,22 +354,22 @@ isColumnWithoutNoCreate,
             //   // ||
             //   // fetchingCurrencies
             // }
-            defaultValue={defaultValue ? [{
-                value: defaultValue.value,
-                label: options.find(option => {
-                    console.log('000000000000000000000000000000000')
-                    console.log(option)
-                    console.log(defaultValue)
-                    if (option.value === defaultValue.value) {
-                        console.log(option.label)
-                        return option.label
-                    }else{
-                        return 'asdads'
-                    }
+            // defaultValue={defaultValue ? [{
+            //     value: defaultValue.value,
+            //     label: options.find(option => {
+            //         console.log('000000000000000000000000000000000')
+            //         console.log(option)
+            //         console.log(defaultValue)
+            //         if (option.value === defaultValue.value) {
+            //             console.log(option.label)
+            //             return option.label
+            //         }else{
+            //             return 'asdads'
+            //         }
 
-                })
-            }] : ''}
-            defaultValue={defaultValue ? Array.isArray(defaultValue) && defaultValue.find(option => option.value === field.value) : ''}
+            //     })
+            // }] : ''}
+            // defaultValue={defaultValue ? Array.isArray(defaultValue) && defaultValue.find(option => option.value === field.value) : ''}
             value={
               options
                 ? options.find((option) => option.value === field.value)
@@ -430,33 +422,33 @@ isColumnWithoutNoCreate,
               onCreateOption={this.handleCreate}
               defaultValue={this.setDefaultValue(options)}
               isDisabled={isDisabled}
-//               // isLoading={
-//               //   fetchingAllUserByOraganizationId ||
-//               //   fetchingContacts ||
-//               //   fetchingOnlySalesUsers ||
-//               //   fetchingAccounts ||
-//               //   fetchingOpportunities ||
-//               //   fetchingStages ||
-//               //   fetchingSources ||
-//               //   fetchingCountries
-//               //   // fetchingCurrencies
-//               // }
-              defaultValue={defaultValue ? [{
-                  value: defaultValue.value,
-                  label: options.find(option => {
-                      console.log('000000000000000000000000000000000')
-                      console.log(option)
-                      console.log(defaultValue)
-                      if (option.value === defaultValue.value) {
-                          console.log(option.label)
-                          return option.label
-                      }else{
-                          return 'asdads'
-                      }
+              // isLoading={
+              //   fetchingAllUserByOraganizationId ||
+              //   fetchingContacts ||
+              //   fetchingOnlySalesUsers ||
+              //   fetchingAccounts ||
+              //   fetchingOpportunities ||
+              //   fetchingStages ||
+              //   fetchingSources ||
+              //   fetchingCountries
+              //   // fetchingCurrencies
+              // }
+              // defaultValue={defaultValue ? [{
+              //     value: defaultValue.value,
+              //     label: options.find(option => {
+              //         console.log('000000000000000000000000000000000')
+              //         console.log(option)
+              //         console.log(defaultValue)
+              //         if (option.value === defaultValue.value) {
+              //             console.log(option.label)
+              //             return option.label
+              //         }else{
+              //             return 'asdads'
+              //         }
 
-                  })
-              }] : ''}
-              defaultValue={defaultValue ? Array.isArray(defaultValue) && defaultValue.find(option => option.value === field.value) : ''}
+              //     })
+              // }] : ''}
+              // defaultValue={defaultValue ? Array.isArray(defaultValue) && defaultValue.find(option => option.value === field.value) : ''}
               value={
                 options
                   ? options.find((option) => option.value === field.value)
@@ -478,20 +470,10 @@ isColumnWithoutNoCreate,
 
 
 const mapStateToProps = ({ designations,job  }) => ({
-//   countries: auth.countries,
-//   currencies: auth.currencies,
-//   fetchingCountries: auth.fetchingCountries,
-//   fetchingCurrencies: auth.fetchingCurrencies,
-//   userId: auth.userDetails.userId,
+  countries: job.countries,
+  currencies: job.currencies,
   designations: job.designations,
-//   educations: education.educations,
-//   organizationId: auth.userDetails.organizationId,
-//   allUsersListByOrganizationId: call.allUsersListByOrganizationId,
-//   fetchingAllUserByOraganizationId: call.fetchingAllUserByOraganizationId,
-//   timeZone: auth.timeZone,
-//   documents: document.documents,
-//   sectors: sector.sectors,
-//   roles: role.roles,
+  roles: job.roles,
  
 });
 
@@ -499,13 +481,10 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       
-      // getRoles,
+      getRoles,
       getDesignations,
-      // getTasks,
-      // getExpenses,
-      // getEvents,
-      // getEducations,
-      // getFunctions
+      getCurrency,
+      getCountries
     },
     dispatch
   );

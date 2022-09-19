@@ -479,28 +479,12 @@ class JobUploadForm extends Component {
                       <FastField
                         name="roleTypeId"
                         selectType="roleType"
-                        label="Role"
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.role"
-                        //     defaultMessage="Role"
-                        //   />
-                        // }
-                        isColumnWithoutNoCreate
-                        // selectType="designationType"
-                        // options={[
-                        //   "Board",
-                        //   "CXO",
-                        //   "Director",
-                        //   "Unit Head",
-                        //   "Mid Level",
-                        //   "Junior",
-                        // ]}
+                        label="Role"      
                         isColumn
+                        isColumnWithoutNoCreate
                         width={"100%"}
-                        component={InputComponent}
-                        // component={SearchSelect}
-                        // value={values.designationTypeId}
+                        component={SearchSelect}
+                        value={values.roleTypeId}
                         inlineLabel
                       />
                     </div>
@@ -990,18 +974,14 @@ class JobUploadForm extends Component {
                       <Field
                         name="currency"
                         isColumnWithoutNoCreate
-                        placeholder="Currency"
-                        // defaultValue={{
-                        //   value: this.props.user.currency,
-                        // }}
                         label="
                          Currency"
                         isColumn
                         width={"100%"}
                         selectType="currencyName"
                         isRequired
-                        // component={SearchSelect}
-                        component={InputComponent}
+                        component={SearchSelect}
+             
                       />
                     </div> 
                     <Spacer style={{ marginTop: "5%" }} />
