@@ -29,7 +29,11 @@ function JobTab(props) {
               key="1"
             >
               <Suspense fallback={"Loading ..."}>
-              <JobCard/> </Suspense>
+              <JobCard 
+              addCandidateApply={props.addCandidateApply}
+              handleCandidateApplyModal={props.handleCandidateApplyModal}
+              />
+               </Suspense>
             </TabPane>
   
             <TabPane

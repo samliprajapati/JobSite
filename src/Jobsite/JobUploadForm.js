@@ -16,12 +16,27 @@ import { FlexContainer } from "../Components/UI/Layout";
 import { TextareaComponent } from "../Components/Forms/Formik/TextareaComponent";
 import { DatePicker } from "../Components/Forms/Formik/DatePicker";
 import moment from "moment";
-import { addCandidate,getSectors } from "./JobAction";
+import { addCandidate,getSectors,getLibrarys,getIdProofs } from "./JobAction";
+import { DaysCompressorWithMonth } from "./DaysCompressorWithMonth";
 // import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
 const { Option } = Select;
 /**
  * yup validation scheme for creating a contact
  */
+ const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CandidateSchema = Yup.object().shape({
   // contactOwner: Yup.string().required("Please Select contact owner"),
@@ -114,8 +129,9 @@ class JobUploadForm extends Component {
   componentDidMount() {
     // const { getLibrarys,organizationId,} = this.props;
     // console.log();
-    // getLibrarys(organizationId);
+    this.props.getLibrarys();
     this.props.getSectors();
+    this.props.getIdProofs();
     // this.props.getDepartments();
   }
 
@@ -127,21 +143,32 @@ class JobUploadForm extends Component {
       availableDate,
     } = this.props;
 
-    
     const sectorOption = this.props.sectors.map((item) => {
       return {
         label: item.sectorName||"",
         value: item.sectorId,
       };
     });  
-console.log("sec",sectorOption)
+    const libraryOption = this.props.librarys.map((item) => {
+      return {
+        label: item.name || "",
+        value: item.name,
+      };
+    });
+    const IdProofOption = this.props.idProofs.map((item) => {
+      return {
+        label: item.name || "",
+        value: item.name,
+      };
+    });
+// console.log("sec",sectorOption)
     return (
       <>
         <Formik
           initialValues={{
             sectorId: "",
             roleTypeId: "",
-            workpreference:"",
+            workpreference:"Remote",
             partnerId: "",
             sectorName: "",
             partnerName: "",
@@ -315,18 +342,12 @@ console.log("sec",sectorOption)
                     </div>
                   </FlexContainer>                  
                   <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "100%" }}>
+                    <div style={{ width: "47%" }}>
                       <FastField
                         isRequired
                         type="email"
                         name="emailId"
                         label="Email"
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.emailId"
-                        //     defaultMessage="Email"
-                        //   />
-                        // }
                         className="field"
                         isColumn
                         width={"100%"}
@@ -334,47 +355,45 @@ console.log("sec",sectorOption)
                         inlineLabel
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer/>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "100%" }}>
-                      <FastField
-                        // isRequired
-                        // type="email"
-                        name="workpreference"
-                        label="Work Preference"
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.emailId"
-                        //     defaultMessage="Work Preference"
-                        //   />
-                        // }
-                        className="field"
-                        isColumn
-                        width={"100%"}
-                        component={SelectComponent}
-                        options={[
-                          "Remote",
-                          "Hybrid",
-                          "Office"
-                        ]}
-                        inlineLabel
-                      />
+                    <div style={{ width: "47%" }}>
+                    <Field
+                    name="workpreference"
+                    label="Work Preference"
+                    placeholder="Select"
+                    width={"100%"}
+                   component={SelectComponent}
+                   options={[
+                    "Remote",
+                    "Hybrid",
+                    "Office"]}
+                   isColumn
+                   />
+                      {/* <Field
+                    name="workpreference"
+                    label="Work Preference"
+                  // mode
+                    placeholder="Select"
+                    width={"100%"}
+                   component={SelectComponent}
+                   options={[
+                    " Remote",
+                    " Hybrid",
+                    " Office"]}
+                    defaultValue={r}
+                    isColumn
+                    // options={Array.isArray(libraryOption) ? libraryOption : []}   
+                  /> */}
+                     
                     </div>
                   </FlexContainer>
                   <Spacer/>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "29%" }}>
+                  <FlexContainer style={{justifyContent:"space-between",width:"45%"}}>
+                    <div style={{ width: "20%" }}>
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
                         label="Mobile #"
-                        // label={
-                        //   <FormattedMessage
-                        //     id="app.countryDialCode"
-                        //     defaultMessage="Mobile #"
-                        //   />
-                        // }
+                        width={"100%"}
                         isColumn
                         // margintop={"0em"}
                         selectType="dialCode"
@@ -391,7 +410,7 @@ console.log("sec",sectorOption)
                         inlineLabel
                       />
                     </div>
-                    <div style={{ width: "40%", }}>
+                    <div style={{ width: "45%", }}>
                       <FastField
                         type="text"
                         name="mobileNumber"
@@ -411,9 +430,8 @@ console.log("sec",sectorOption)
                     </div>
                     <div
                       style={{
-                        width: "22%",
-                        fontWeight: "bold",
-                       // marginTop: "2px",
+                        width: "10%",
+                        // fontWeight: "bold",
                       }}
                     >
                       WhatsApp
@@ -490,19 +508,9 @@ console.log("sec",sectorOption)
                       <FastField
                         name="idProof"
                         label="ID Proof"
-                       
                         isColumn
-                        // margintop={"0em"}
-                        options={[
-                          "PassPort",
-                          "ID Card",
-                        ]}
-
                         component={SelectComponent}
-                        // defaultValue={{
-                        //   value: this.props.user.countryDialCode,
-                        // }}
-                        // value={values.countryDialCode}
+                        options={Array.isArray(IdProofOption) ? IdProofOption : []}
                         inlineLabel
                       />
                     </div>
@@ -743,39 +751,34 @@ console.log("sec",sectorOption)
                   </FlexContainer>                
                   <Spacer />
                   <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                    <div style={{ width: "47%"}}>
                       <Field
                         name="dateOfBirth"
                         label="Date of Birth"
                         isColumn
                         isColumnWithoutNoCreate
-                        component={DatePicker}
-                        value={values.dateOfBirth}
+                        component={SelectComponent}
+                        options={MONTHS}
+                        // value={values.dateOfBirth}
+                        style={{display:"flex"}}
                       // defaultValue={moment("2020-01-01")}
                       />
                     </div>
-                    {/* <div style={{ width: "47%" }}>
-                      <FastField
-                        name="gender"
-                        //label="Mobile #"
-                        label={
-                          <FormattedMessage
-                            id="app.gender"
-                            defaultMessage="Gender"
-                          />
-                        }
+                    <div style={{ width: "47%"}}>
+                      <Field
+                        name="date"
+                        label="Date"
                         isColumn
-                        margintop={"0em"}
-                        // selectType="dialCode"
-                        component={SearchSelect}
-                        // defaultValue={{
-                        //   value: this.props.user.countryDialCode,
-                        // }}
-                        // value={values.countryDialCode}
-                        inlineLabel
-                        style={{ flexBasis: "80%" }}
+                        isColumnWithoutNoCreate
+                        component={SelectComponent}
+                        options={DaysCompressorWithMonth(
+                         values.dateOfBirth
+                                          )}
+                        // value={values.dateOfBirth}
+                        style={{display:"flex"}}
+                      // defaultValue={moment("2020-01-01")}
                       />
-                    </div> */}
+                    </div>
 
                     <div style={{ width: "47%" }}>
                       <FastField
@@ -789,6 +792,17 @@ console.log("sec",sectorOption)
                         isColumn
                       />
                     </div>
+                    <div style={{ width: "47%" }}>
+                    <Field
+                    name="skills"
+                    label="Skills"
+                    mode
+                    placeholder="Select"
+                    width={"100%"}
+                   component={SelectComponent}
+                    options={Array.isArray(libraryOption) ? libraryOption : []}   
+                  />
+                  </div>
                   </FlexContainer> 
                 </div>
                 &nbsp;
@@ -803,47 +817,7 @@ console.log("sec",sectorOption)
                   )} */}
                   <Spacer />
                   {/* {this.state.candidate && ( */}
-
-                  <>
-                    <Spacer style={{ marginTop: "1.25em" }} />
-                    
-                    <FlexContainer justifyContent="space-between">
-                      
-
-
-<FlexContainer justifyContent="space-between">
-
-                       <Field
-                    name="skills"
-                    //  selectType="contactList"
-                    // isColumnWithoutNoCreate
-                    label="Skills"
-                  
-                  mode
-                    placeholder="Select"
-                    width={"100%"}
-                   component={SelectComponent}
-                   options={[
-                    " Accountancy",
-                   " Aviation"]}
-                    // options={Array.isArray(libraryOption) ? libraryOption : []}
-                     
-                  />
-{/* <Switch  
-  checked={this.state.whiteblue}
-  onChange={this.handleWhiteBlue}
-  disabled={this.state.checked}
-  checkedChildren="White"
-  unCheckedChildren="Blue"
-/> */}
-{/* <Checkbox
-  checked={this.state.checked}
-  onChange={() => this.handleChange()}
-  style={{ marginLeft: "auto" }}
->Both
-                    </Checkbox> */}
-                    </FlexContainer>
-                    </FlexContainer>
+                  <> 
                     <Spacer style={{ marginTop: "1em" }} />
                     <FlexContainer >
                     <FlexContainer justifyContent="space-between">
@@ -901,15 +875,8 @@ console.log("sec",sectorOption)
                           <Field
                             name="availableDate"
                             label="Available from"
-
-                            // label={
-                            //   <FormattedMessage
-                            //     id="app.availableDate"
-                            //     defaultMessage="Available from"
-                            //   />
-                            // }
-                            // disabled={!this.state.availability}
                             component={DatePicker}
+                            style={{display:"flex"}}
                             isColumn
                             width={"100%"}
                             value={values.availableDate}
@@ -933,14 +900,7 @@ console.log("sec",sectorOption)
                       <div style={{ width: "47%" }}>
                         <FastField
                           name="experience"
-                          label="Experience"
-                          // label={
-                          //   <FormattedMessage
-                          //     id="app.experience"
-                          //     defaultMessage="Experience (Years)"
-                          //   />
-                          // }
-                          // className="field"
+                          label="Experience in years"
                           isColumn
                           width={"100%"}
                           component={InputComponent}
@@ -954,14 +914,6 @@ console.log("sec",sectorOption)
                         <Field
                           name="billing"
                           label={this.state.billing ? "Expectation" : "Billing"}
-
-                          // label={ 
-                          //   <FormattedMessage
-                          //     id="app.billing"
-                          //     defaultMessage="Billing/Hr"
-                          //   />
-                          // }
-
                           width={"100%"}
                           isColumn
                           component={InputComponent}                          
@@ -970,14 +922,7 @@ console.log("sec",sectorOption)
                       <div style={{ width: "47%" }}>
                         <FastField
                           name="CostType"
-                          label="Cost Type"
-                          // label={
-                          //   <FormattedMessage
-                          //     id="app.cost"
-                          //     defaultMessage="Cost Type"
-                          //   />
-                          // }
-                          // className="field"
+                          label="Cost Type" 
                           isColumn
                           width={"100%"}
                           component={SelectComponent}
@@ -1128,12 +1073,10 @@ console.log("sec",sectorOption)
 }
 
 const mapStateToProps = ({ auth, job}) => ({
-  // token: auth.token,
-  // opportunityId: opportunity.opportunity.opportunityId,
-  // contact: contact.contact,
   addingCandidate: job.addingCandidate,
-  // resumeForm: candidate.resumeForm,
   sectors: job.sectors,
+  librarys: job.librarys,
+  idProofs:job.idProofs,
   // organizationId: auth.userDetails.organizationId,
   // addingCandidateError: candidate.addingCandidateError,
   // fetchingcontacts: contact.fetchingcontacts,
@@ -1157,7 +1100,7 @@ const mapStateToProps = ({ auth, job}) => ({
   //   opportunity.opportunity.metaData.account &&
   //   opportunity.opportunity.metaData.account.accountId,
   // currencies: auth.currencies,
-  // librarys: librarys.librarys,
+  
   // departments: departments.departments,
 });
 
@@ -1166,8 +1109,9 @@ const mapDispatchToProps = (dispatch) =>
     {
       // getContacts,
       addCandidate,
-      // getLibrarys,
+      getLibrarys,
       getSectors,
+      getIdProofs,
       // getDepartments
       // getAllPartnerListByUserId,
       // getContactById,

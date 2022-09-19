@@ -7,6 +7,8 @@ import JobUploadForm from "./JobUploadForm";
 import JobCard from "./JobCard";
 import {setJobViewType} from "./JobAction";
 import { BundleLoader } from '../Components/Placeholder';
+import { handleCandidateApplyModal } from "./JobAction";
+import CandidateJobApplyModal from "./CandidateJobApplyModal";
 
 function Job(props) {
   useEffect(() => {
@@ -24,23 +26,34 @@ function Job(props) {
        <div>
  <Suspense fallback={<BundleLoader />}>
           {viewType === "jobcard" ? (
-            <JobCard/>
+            <JobCard 
+            addCandidateApply={props.addCandidateApply}
+            handleCandidateApplyModal={props.handleCandidateApplyModal}
+            />
           ) : viewType === "jobform" ? (
             <JobUploadForm/>
           ) : null}
         </Suspense>
     </div>
+    <CandidateJobApplyModal
+    addCandidateApply={props.addCandidateApply}
+    handleCandidateApplyModal={props.handleCandidateApplyModal}
+    />
+
+    
     </React.Fragment>
   )
 }
 const mapStateToProps = ({job }) => ({
-  viewType:job.viewType
+  viewType:job.viewType,
+  addCandidateApply: job.addCandidateApply,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
       {
-        setJobViewType
+        setJobViewType,
+        handleCandidateApplyModal
       },
       dispatch
   );
