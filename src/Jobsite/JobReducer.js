@@ -24,6 +24,10 @@ const initialState = {
   fetchingDesignations: false,
   fetchingDesignationsError: false,
   designations: [],
+
+  fetchingDepartments: false,
+  fetchingDepartmentsError: false,
+  departments: [],
 };
 
 export const jobReducer = (state = initialState, action) => {
@@ -84,6 +88,14 @@ export const jobReducer = (state = initialState, action) => {
         fetchingDesignations: false,
         fetchingDesignationsError: true,
       };
+    
+      case types.GET_DEPARTMENTS_REQUEST:
+        return { ...state, fetchingDepartments: true };
+      case types.GET_DEPARTMENTS_SUCCESS:
+        return { ...state, fetchingDepartments: false, departments: action.payload };
+      case types.GET_DEPARTMENTS_FAILURE:
+        return { ...state, fetchingDepartments: false, fetchingDepartmentsError: true };
+
     default:
       return state;
   }
