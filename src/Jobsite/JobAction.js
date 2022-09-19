@@ -84,11 +84,7 @@ export const getIdProofs = () => (dispatch) => {
     type: types.GET_PROOFS_REQUEST,
   });
   axios
-    .get(`${base_url}/idProofType/all-list/website`,{
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-      },
-    })
+    .get(`${base_url}/idProofType/all-list/website?url=dtoc.tekorero.com`,)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -109,7 +105,7 @@ export const getDesignations = () => (dispatch) => {
     type: types.GET_DESIGNATIONS_REQUEST,
   });
   axios               
-    .get(`${base_url}/designation/website`,)
+    .get(`${base_url}/designation/website?url=dtoc.tekorero.com`,)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -121,6 +117,48 @@ export const getDesignations = () => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_DESIGNATIONS_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getDepartments = () => (dispatch) => {
+  dispatch({
+    type: types.GET_DEPARTMENTS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/department/website?url=dtoc.tekorero.com`,)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEPARTMENTS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DEPARTMENTS_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getRoles = () => (dispatch) => {
+  dispatch({
+    type: types.GET_ROLES_REQUEST,
+  });
+  axios
+    .get(`${base_url}/roleType/`,)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ROLES_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ROLES_FAILURE,
         payload: err,
       });
     });
