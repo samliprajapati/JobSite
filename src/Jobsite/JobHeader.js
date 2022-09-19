@@ -8,7 +8,7 @@
                render() {
                    const{setJobViewType,viewType}=this.props
                    return (
-                       <div>
+                       <div >
                            <ActionHeader
                                leftComponent={<JobHeaderLeft
                                    setJobViewType={setJobViewType}  
