@@ -16,7 +16,7 @@ function JobTab(props) {
   return (
     <>
 
-          <TabsWrapper>
+          <TabsWrapper >
           <StyledTabs defaultActiveKey={activeKey} onChange={handleTabChange}>
           <TabPane
               tab={
