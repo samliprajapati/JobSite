@@ -23,6 +23,7 @@ const JobHeaderLeft = (props) => {
           onClick={() => props.setJobViewType("jobcard")}
           style={{
             // marginRight: "0.5rem",
+            cursor:"pointer",
             color: props.viewType === "jobcard" && "#1890ff",
           }}
         > 
@@ -38,6 +39,7 @@ const JobHeaderLeft = (props) => {
           style={{
             
             // marginRight: "0.5rem",
+            cursor:"pointer",
             color: props.viewType === "jobform" && "#1890ff",
           }}
         >
