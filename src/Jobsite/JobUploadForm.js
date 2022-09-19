@@ -348,19 +348,19 @@ class JobUploadForm extends Component {
                   </FlexContainer>
                   <Spacer />                  
                   <FlexContainer justifyContent="space-between" >
-                    <div style={{ width: "10%" }}>
+                    <div style={{ width: "24%" }}>
                       <Field
                         name="countryDialCode"
                         isColumnWithoutNoCreate
-                        label="Mobile "
+                        label="Mobile"
+                        selectType="dialCode"
                         width={"100%"}
                         isColumn                        
-                        selectType="dialCode"                        
-                        component={InputComponent}                        
+                        component={SearchSelect}                        
                         inlineLabel
                       />
                     </div>
-                    <div style={{ width: "30%" }}>
+                    <div style={{ width: "34%" }}>
                       <Field
                         type="text"
                         name="mobileNumber"                        
