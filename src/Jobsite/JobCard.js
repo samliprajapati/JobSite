@@ -33,18 +33,31 @@ function Job(props) {
   console.log(data);
   return (
     <React.Fragment>
+      <div className="wrapper">
+
+      
       {data.map((item) => {
         return (
-          <div className="card">
-            <h4>{item.jobOrder}</h4>
+          <div className="main-card">
+            <div className="card-part1">
+              <h3><b>Job Id:</b></h3>
+            <h3>{item.jobOrder}</h3>
+            <h3><b>Recruitment:</b></h3>
             <h3>{item.requirementName}</h3>
-
-            <div className="mixed">
-              <h3 className="exp">{item.exp}</h3>
-
-              <h3 className="location">{item.location}</h3>
+            <h3><b>Skills:</b></h3>
             </div>
-            <h3 className="description">{item.description}</h3>
+            <div className="card-part2">
+              <h3><b>Preference:</b></h3>
+           
+            <h3><b>Location:</b></h3>
+                {item.location}
+              <h3><b>Start Date:</b></h3>
+            <h3><b>Available Date:</b></h3>
+            </div>
+            <div className="card-part3">
+            <h3><b>Description:</b></h3>
+              <h3 className="description">{item.description}</h3>
+            </div>
             <Button
               type="primary"
               htmlType="submit"
@@ -57,6 +70,7 @@ function Job(props) {
           </div>
         );
       })}
+      </div>
     </React.Fragment>
   );
 }
