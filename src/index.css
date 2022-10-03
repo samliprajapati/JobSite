@@ -35,18 +35,7 @@ code {
     width: 600px;
     text-align: left;
 }
-
-.description {
-    color: #091e42;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 50px;
-    text-align: left;
-}
-
-.aply{
-    margin: 0 92%;
-} */
+ */
 
 .wrapper{
     display:flex;
@@ -75,4 +64,26 @@ code {
         /* display: flex; */
         width: 45%;
         justify-content: space-between;
+    }
+
+    .description {
+        height: 43%;
+        overflow: auto;
+    }
+
+    .aply{
+        margin: 0 9%;
+    }
+
+    .loc {
+        display: grid;
+    }
+    .avl {
+        display: grid;
+    }
+    .req {
+        display: grid;
+    }
+    .job {
+        display: grid;
     }

@@ -3,6 +3,7 @@ import { Button } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handleCandidateApplyModal } from "./JobAction";
+import moment from "moment";
 
 function Job(props) {
   const [jobData, setJobData] = useState([]);
@@ -40,19 +41,19 @@ function Job(props) {
         return (
           <div className="main-card">
             <div className="card-part1">
-              <h3><b>Job Id:</b></h3>
-            <h3>{item.jobOrder}</h3>
-            <h3><b>Recruitment:</b></h3>
-            <h3>{item.requirementName}</h3>
-            <h3><b>Skills:</b></h3>
+              <h3 className="job" ><b>Job Id</b>{item.jobOrder}</h3>
+            <h3 className="req"><b>Recruitment</b>{item.requirementName}</h3>
+            <h3><b>Skills</b></h3>
             </div>
             <div className="card-part2">
-              <h3><b>Preference:</b></h3>
+              <h3><b>Preference</b></h3>
            
-            <h3><b>Location:</b></h3>
-                {item.location}
-              <h3><b>Start Date:</b></h3>
-            <h3><b>Available Date:</b></h3>
+            <h3 className="loc"><b>Location</b>{item.location}</h3>
+                
+              <h3 className="avl"><b>Start Date</b>
+              {` ${moment(item.avilableDate).format("ll")}`}
+              </h3>
+              
             </div>
             <div className="card-part3">
             <h3><b>Description:</b></h3>
