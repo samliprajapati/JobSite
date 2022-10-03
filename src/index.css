@@ -9,7 +9,7 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.card {
+/* .main-card {
     box-shadow: 0 2px 6px 0 rgb(0 106 194 / 20%);
     border-radius: 4px;
     background: #fff;
@@ -17,12 +17,16 @@ code {
     margin-bottom: 8px;
 }
 
-.mixed {
+.card-part1 {
     display: flex;
     width: 45%;
     justify-content: space-between;
 }
-
+.card-part2 {
+    display: flex;
+    width: 45%;
+    justify-content: space-between;
+}
 .headLine {
     color: #091e42;
     font-size: 24px;
@@ -42,4 +46,33 @@ code {
 
 .aply{
     margin: 0 92%;
+} */
+
+.wrapper{
+    display:flex;
+    flex-wrap:wrap;
+    width:100%
+  }
+  .main-card{
+   
+    width: 99%;
+    margin: 0.5em 0.5em 0.5em 0.5em;
+    display: flex;
+    background-color: ghostwhite;
 }
+    .card-part1 {
+        /* display: flex; */
+        width: 20%;
+        justify-content: space-between;
+    }
+    .card-part2 {
+        /* display: flex; */
+        width: 20%;
+        justify-content: space-between;
+    }
+  
+    .card-part3 {
+        /* display: flex; */
+        width: 45%;
+        justify-content: space-between;
+    }
