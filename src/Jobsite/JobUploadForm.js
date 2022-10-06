@@ -1048,7 +1048,6 @@ const mapStateToProps = ({ auth, job }) => ({
   librarys: job.librarys,
   idProofs: job.idProofs,
   // organizationId: auth.userDetails.organizationId,
-  // addingCandidateError: candidate.addingCandidateError,
   // fetchingcontacts: contact.fetchingcontacts,
   // fetchingcontactsError: contact.fetchingcontactsError,
   // contacts: contact.contacts,
