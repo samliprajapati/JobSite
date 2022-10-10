@@ -40,6 +40,8 @@ const initialState = {
   fetchingCountries: false,
   fetchingCountriesError: false,
   countries: [],
+
+  addingPartner: false,
 };
 
 export const jobReducer = (state = initialState, action) => {
@@ -143,6 +145,18 @@ export const jobReducer = (state = initialState, action) => {
             fetchingCountriesError: true,
           };
 
+    case types.ADD_PARTNER_REQUEST:
+      return { ...state, addingPartner: true };
+    case types.ADD_PARTNER_SUCCESS:
+      return {
+        ...state,
+        addingPartner: false,
+      };
+    case types.ADD_PARTNER_FAILURE:
+      return {
+        ...state,
+        addingPartner: false,
+      };
     default:
       return state;
   }

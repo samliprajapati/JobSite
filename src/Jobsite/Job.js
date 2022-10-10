@@ -9,6 +9,7 @@ import {setJobViewType} from "./JobAction";
 import { BundleLoader } from '../Components/Placeholder';
 import { handleCandidateApplyModal } from "./JobAction";
 import CandidateJobApplyModal from "./CandidateJobApplyModal";
+import JobVendorForm from "./JobVendorForm";
 
 function Job(props) {
   useEffect(() => {
@@ -25,14 +26,16 @@ function Job(props) {
        viewType={viewType} />
        <div>
  <Suspense fallback={<BundleLoader />}>
-          {viewType === "jobcard" ? (
+          {viewType === "jobcard" ? 
             <JobCard 
             addCandidateApply={props.addCandidateApply}
             handleCandidateApplyModal={props.handleCandidateApplyModal}
             />
-          ) : viewType === "jobform" ? (
+           : viewType === "jobform" ? 
             <JobUploadForm/>
-          ) : null}
+          :  viewType === "jobvendor" ? 
+            <JobVendorForm/>
+           : null}
         </Suspense>
     </div>
     <CandidateJobApplyModal

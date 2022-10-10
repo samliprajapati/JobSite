@@ -45,7 +45,19 @@ const JobHeaderLeft = (props) => {
         >
           Upload Profile
         </span>
-       
+      </Tooltip>
+      &nbsp;&nbsp;
+      <Tooltip>
+        <span
+          onClick={() => props.setJobViewType("jobvendor")}
+          style={{
+            // marginRight: "0.5rem",
+            cursor:"pointer",
+            color: props.viewType === "jobvendor" && "#1890ff",
+          }}
+        > 
+        Vendor
+        </span>
       </Tooltip>
     </FlexContainer>
 
