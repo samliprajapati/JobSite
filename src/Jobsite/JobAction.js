@@ -209,3 +209,29 @@ export const getCountries = () => (dispatch) => {
       });
     });
 };
+
+export const addPartner = (data, cb) => (dispatch) => {
+  dispatch({
+    type: types.ADD_PARTNER_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/partner/website?url=dtoc.tekorero.com`, data)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_PARTNER_SUCCESS,
+        payload: res.data,
+      });
+      message.success(res.data.message)
+      cb && cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_PARTNER_FAILURE,
+        payload: err,
+      });
+      cb && cb();
+    });
+};
