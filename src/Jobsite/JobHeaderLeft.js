@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { FlexContainer } from '../Components/UI/Layout'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import FWLogo from "../images/Logo_new.png";
-
+// import FWLogo from "../images/Logo_new.png";
+import FWLogo from "../images/axis.jpeg";
 const JobHeaderLeft = (props) => {
     return (
       <FlexContainer style={{lineHeight:"0.125em", alignItems:"center"}}>
@@ -15,6 +15,12 @@ const JobHeaderLeft = (props) => {
               style={{ width: 100 }}
               alt="Tekorero logo"
             />
+{/* <img
+              className="big-logo"
+              src={FWLogo}
+              style={{ width: 100 }}
+              alt="Tekorero logo"
+            /> */}
             &nbsp;&nbsp;&nbsp;
         <Tooltip
       // title="Distributor"
