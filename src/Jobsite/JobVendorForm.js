@@ -82,12 +82,20 @@ class JobVendorForm extends Component {
             // userId: this.props.userId,
             notes: "",
             taxRegistrationNumber: "",
-            country: "",
             businessRegistrationNumber: "",
             bankName: "",
             // country: "",
             accountNumber: "",
             status: this.state.documentStatus ? "true" : "false",
+            
+            contactMapper:
+              {
+              emailId : "",
+              firstName: "",
+              lastName: "",
+              phoneNumber: "",
+              },
+
             address: [
               {
                 address1: "",
@@ -242,7 +250,7 @@ class JobVendorForm extends Component {
                       <FlexContainer justifyContent="space-between">
                         <div style={{ width: "40%" }}>
                           <FastField
-                            name="firstName"
+                            name="contactMapper.firstName"
                             isColumnWithoutNoCreate 
                             label="First Name"
                             width={"100%"}
@@ -252,7 +260,7 @@ class JobVendorForm extends Component {
                         </div>
                         <div style={{ width: "40%" }}>
                           <FastField
-                            name="lastName"
+                            name="contactMapper.lastName"
                             isColumn
                             label="LastName"
                             component={InputComponent}
@@ -283,7 +291,7 @@ class JobVendorForm extends Component {
                         <div style={{ width: "70%" }}>
                           <FastField
                             type="text"
-                            name="phoneNo"
+                            name="contactMapper.phoneNumber"
                             isColumn
                             component={InputComponent}
                             inlineLabel
@@ -297,7 +305,7 @@ class JobVendorForm extends Component {
                           <FastField
                             isRequired
                             type="email"
-                            name="email"
+                            name="contactMapper.emailId"
                             label="Email"
                             className="field"
                             isColumn
