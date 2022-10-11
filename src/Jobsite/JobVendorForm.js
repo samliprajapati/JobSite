@@ -24,8 +24,13 @@ const { Option } = Select;
  */
 const PartnerSchema = Yup.object().shape({
   // contactOwner: Yup.string().required("Please Select contact owner"),
-  email: Yup.string().email("Enter a valid Email").required("Input needed!"),
+  // email: Yup.string().email("Enter a valid Email").required("Input needed!"),
   partnerName: Yup.string().required("Input needed!"),
+  contactMapper: Yup.object({
+    firstName: Yup.string().nullable().required("Input required!"),
+    lastName: Yup.string().nullable().required("Input required!"),
+    emailId:Yup.string().email("Enter a valid Email").required("Input needed!"),
+  }),
 });
 
 class JobVendorForm extends Component {
@@ -77,7 +82,7 @@ class JobVendorForm extends Component {
             sectorDescription: "",
             url: "",
             countryDialCode: "",
-            email: "",
+            // email: "",
             phoneNo: "",
             // userId: this.props.userId,
             notes: "",
@@ -159,7 +164,7 @@ class JobVendorForm extends Component {
                         component={InputComponent}
                         inlineLabel
                       />
-                      <FlexContainer>
+                      {/* <FlexContainer>
                         <div style={{ width: "100%" }}>
                           <FastField
                             isRequired
@@ -173,16 +178,14 @@ class JobVendorForm extends Component {
                             inlineLabel
                           />
                         </div>
-                      </FlexContainer>
+                      </FlexContainer> */}
                       <Spacer />
                       <FlexContainer>
                         <div style={{ width: "100%" }}>
                           <FastField
-                            isRequired
                             name="url"
                             type="text"
                             label="URL"
-                            className="field"
                             isColumn
                             width={"100%"}
                             component={InputComponent}
@@ -239,13 +242,12 @@ class JobVendorForm extends Component {
                           <Field
                             name="notes"
                             label="Notes"
-                            isRequired
                             isColumn
                             component={TextareaComponent}
                           />
                         </div>
                       </FlexContainer>
-                      <Spacer style={{ marginTop: "1.5em" }} />
+                      <Spacer style={{ marginTop: "5.5em" }} />
                       <h2><b>About You</b></h2>
                       <FlexContainer justifyContent="space-between">
                         <div style={{ width: "40%" }}>
@@ -270,13 +272,7 @@ class JobVendorForm extends Component {
                         </div>
                       </FlexContainer>
                           <Spacer/>
-                      
-                    </div>
-                    
-                  </div>
-                  <div style={{ width: "49%" }}>
-                    <Spacer />
-                    <FlexContainer justifyContent="space-between">
+                          <FlexContainer justifyContent="space-between">
                         <div style={{ width: "27%" }}>
                           <FastField
                             name="countryDialCode"
@@ -315,6 +311,12 @@ class JobVendorForm extends Component {
                           />
                         </div>
                       </FlexContainer>
+                    </div>
+                    
+                  </div>
+                  <div style={{ width: "49%" }}>
+        
+                   
                       <Spacer/>
                     <FieldArray
                       name="address"
