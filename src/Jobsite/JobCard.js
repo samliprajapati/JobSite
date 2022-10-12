@@ -46,8 +46,8 @@ function Job(props) {
             <h3><b>Skills</b></h3>
             </div>
             <div className="card-part2">
-              <h3><b>Preference</b></h3>
-           
+              <h3 className="crd"><b>Preference</b>{item.workPreference}</h3>
+          
             <h3 className="loc"><b>Location</b>{item.location}</h3>
                 
               <h3 className="avl"><b>Start Date</b>

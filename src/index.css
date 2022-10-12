@@ -75,6 +75,9 @@ code {
         margin: 0 9%;
     }
 
+    .crd{
+        display: grid;
+    }
     .loc {
         display: grid;
     }

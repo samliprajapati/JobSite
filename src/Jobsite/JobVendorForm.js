@@ -38,11 +38,20 @@ class JobVendorForm extends Component {
     super(props);
     this.state = {
       documentStatus: false,
+      checkeds: false,
     };
   }
   handleDocumentStatus = (checked) => {
     this.setState({ documentStatus: checked });
   };
+
+  handleChange = () => {
+    this.setState({
+      checkeds: !this.state.checkeds,
+    });
+    console.log(this.state.checkeds);
+  };
+
   handleReset = (resetForm) => {
     const { callback } = this.props;
     callback && callback();
@@ -152,7 +161,7 @@ class JobVendorForm extends Component {
                 >
                   <div style={{ width: "49%" }}>
                     {/* Left */}
-                    <h2><b>About Your Company</b></h2>
+                    <h2><b>Register the Company Here</b></h2>
                     <div>
                       <Field
                         isRequired
@@ -237,18 +246,26 @@ class JobVendorForm extends Component {
                     </div>
                
                     <div>
-                      <FlexContainer>
-                        <div style={{ width: "100%" }}>
-                          <Field
-                            name="notes"
-                            label="Notes"
-                            isColumn
-                            component={TextareaComponent}
-                          />
-                        </div>
-                      </FlexContainer>
-                      <Spacer style={{ marginTop: "5.5em" }} />
-                      <h2><b>About You</b></h2>
+                      
+                      <Spacer style={{ marginTop: "1.5em" }} />
+                  
+                    <FieldArray
+                      name="address"
+                      render={(arrayHelpers) => (
+                        <AddressFieldArray
+                          singleAddress
+                          arrayHelpers={arrayHelpers}
+                          values={values}
+                        />
+                      )}
+                    />
+                    
+                    </div>
+                    
+                  </div>
+                  <div style={{ width: "49%" }}>
+        
+                  <h2><b>Contact Person</b></h2>
                       <FlexContainer justifyContent="space-between">
                         <div style={{ width: "40%" }}>
                           <FastField
@@ -311,25 +328,19 @@ class JobVendorForm extends Component {
                           />
                         </div>
                       </FlexContainer>
-                    </div>
-                    
-                  </div>
-                  <div style={{ width: "49%" }}>
-        
-                   
-                      <Spacer/>
-                    <FieldArray
-                      name="address"
-                      render={(arrayHelpers) => (
-                        <AddressFieldArray
-                          singleAddress
-                          arrayHelpers={arrayHelpers}
-                          values={values}
-                        />
-                      )}
-                    />
+                      
                     <Spacer />
-                    <FlexContainer justifyContent="space-between">
+                    <FlexContainer>
+                        <div style={{ width: "100%" }}>
+                          <Field
+                            name="notes"
+                            label="Notes"
+                            isColumn
+                            component={TextareaComponent}
+                          />
+                        </div>
+                      </FlexContainer>
+                    {/* <FlexContainer justifyContent="space-between">
                       <div style={{ width: "47%" }}>
                         <Field
                           name="taxRegistrationNumber"
@@ -377,7 +388,7 @@ class JobVendorForm extends Component {
                           inlineLabel
                         />
                       </div>
-                    </FlexContainer>
+                    </FlexContainer> */}
                     <Spacer style={{ marginTop: "1.5625em" }} />
                     {/* <StyledLabel>Status</StyledLabel>
                     &nbsp;&nbsp;
@@ -387,10 +398,22 @@ class JobVendorForm extends Component {
                       checkedChildren="Approved"
                       unCheckedChildren="Not Approved"
                     /> */}
+                    <div style={{}}>
+              <Checkbox
+                      // disabled={this.props.validOtp === ""}
+                      // disabled={true}
+                      checkeds={this.state.checkeds}
+                      onChange={this.handleChange}
+                    >
+                      <span> Agree on the privacy statement of AXIX Digital B.V.</span>
+                    </Checkbox>
+              </div>
                   </div>
                 </div>
               </MainWrapper>
               <Spacer style={{ margin: "1%" }} />
+              
+              
               <FlexContainer justifyContent="center">
                 <Button
                   type="primary"
