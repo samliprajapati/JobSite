@@ -43,7 +43,7 @@ function Job(props) {
             <div className="card-part1">
               <h3 className="job" ><b>Job Id</b>{item.jobOrder}</h3>
             <h3 className="req"><b>Recruitment</b>{item.requirementName}</h3>
-            <h3><b>Skills</b></h3>
+            <h3 className="req"><b>Skills</b>{item.skillSetList}</h3>
             </div>
             <div className="card-part2">
               <h3 className="crd"><b>Preference</b>{item.workPreference}</h3>
