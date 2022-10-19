@@ -7,8 +7,9 @@ import JobUploadForm from "./JobUploadForm";
 import JobCard from "./JobCard";
 import {setJobViewType} from "./JobAction";
 import { BundleLoader } from '../Components/Placeholder';
-import { handleCandidateApplyModal } from "./JobAction";
+import { handleCandidateApplyModal,handleEmailFormModal } from "./JobAction";
 import CandidateJobApplyModal from "./CandidateJobApplyModal";
+import AddEmailFormModal from "./AddEmailFormModal";
 import JobVendorForm from "./JobVendorForm";
 
 function Job(props) {
@@ -28,8 +29,8 @@ function Job(props) {
  <Suspense fallback={<BundleLoader />}>
           {viewType === "jobcard" ? 
             <JobCard 
-            addCandidateApply={props.addCandidateApply}
-            handleCandidateApplyModal={props.handleCandidateApplyModal}
+            addEmailformModal={props.addEmailformModal}
+            handleEmailFormModal={props.handleEmailFormModal}
             />
            : viewType === "jobform" ? 
             <JobUploadForm/>
@@ -38,10 +39,14 @@ function Job(props) {
            : null}
         </Suspense>
     </div>
-    <CandidateJobApplyModal
+    <AddEmailFormModal
+    addEmailformModal={props.addEmailformModal}
+    handleEmailFormModal={props.handleEmailFormModal}
+    />
+    {/* <CandidateJobApplyModal
     addCandidateApply={props.addCandidateApply}
     handleCandidateApplyModal={props.handleCandidateApplyModal}
-    />
+    /> */}
 
     
     </React.Fragment>
@@ -50,13 +55,15 @@ function Job(props) {
 const mapStateToProps = ({job }) => ({
   viewType:job.viewType,
   addCandidateApply: job.addCandidateApply,
+  addEmailformModal:job.addEmailformModal,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
       {
         setJobViewType,
-        handleCandidateApplyModal
+        handleCandidateApplyModal,
+        handleEmailFormModal
       },
       dispatch
   );

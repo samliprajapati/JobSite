@@ -51,7 +51,7 @@ const CandidateSchema = Yup.object().shape({
   firstName: Yup.string().required("Input needed!"),
 });
 
-class JobUploadForm extends Component {
+class CandidateJobApplyForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -1086,7 +1086,7 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(JobUploadForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CandidateJobApplyForm);
 
 
 

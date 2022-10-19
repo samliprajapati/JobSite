@@ -16,7 +16,7 @@ import { FlexContainer } from "../Components/UI/Layout";
 import { TextareaComponent } from "../Components/Forms/Formik/TextareaComponent";
 import { DatePicker } from "../Components/Forms/Formik/DatePicker";
 import moment from "moment";
-
+import {AddEmail} from "./JobAction";
 class JobEmailForm extends Component {
     constructor(props) {
       super(props);
@@ -24,7 +24,11 @@ class JobEmailForm extends Component {
        
       };
     }
-
+    handleReset = (resetForm) => {
+      const { callback } = this.props;
+      callback && callback();
+      resetForm();
+    };
     render() {
         const {} = this.props;
         return (
@@ -34,18 +38,18 @@ class JobEmailForm extends Component {
                   emailId: "",
                  
                 }}
-                validationSchema={CandidateSchema}
+                // validationSchema={CandidateSchema}
                 onSubmit={(values, { resetForm }) => {
                   // console.log(values,this.props.responseData&&this.props.responseData.phoneNumbers.length  ?  this.props.responseData.phoneNumbers[0] : "",);
       
-                //   addCandidate(
-                    // {
-                    //   ...values,
+                  this.props.AddEmail(
+                    {
+                      ...values,
                      
-                    // },
+                    },
       
-                    // () => this.handleReset(resetForm)
-                //   );
+                    () => this.handleReset(resetForm)
+                  );
                 }}
               >
                 {({
@@ -58,34 +62,31 @@ class JobEmailForm extends Component {
                 }) => (
                     <Form>
               <Spacer />
-              <Spacer style={{ marginTop: "2em" }} />
-              <MainWrapper style={{ width: "50%", margin: "auto", padding: "1em" }}
-              >
+              
                 <FlexContainer >
-                    <div style={{ width: "100%" }}>
+                    <div style={{ width: "45%" }}>
                       <FastField
-                        isRequired
                         type="email"
                         name="emailId"
-                        label="Email"
-                        className="field"
+                        label="Email"  
                         isColumn
                         width={"100%"}
                         component={InputComponent}
                         inlineLabel
                       />
                     </div>
+                   
                   </FlexContainer>
-                  </MainWrapper>
+             
               <Spacer style={{margin:"1%"}}/>
-              <FlexContainer justifyContent="center">
-                <Button
+              <FlexContainer justifyContent="flex-end">
+              <Button
                   type="primary"
                   htmlType="submit"
                   // icon={<PoweroffOutlined />}
-                //   Loading={addingCandidate}
+                  Loading={this.props.addingEmail}
                 >
-                  Apply
+                  Submit
                 </Button>
                     </FlexContainer>
             </Form>
@@ -96,12 +97,13 @@ class JobEmailForm extends Component {
   }
 }
 const mapStateToProps = ({ auth, job }) => ({
+  addingEmail:job.addingEmail
   });
   
   const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
       {
-        
+        AddEmail
       },
       dispatch
     );

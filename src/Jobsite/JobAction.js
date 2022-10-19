@@ -2,6 +2,8 @@ import * as types from "./JobActionType";
 import { base_url } from "../Config/Auth";
 import axios from "axios";
 import { message } from "antd";
+import { createBrowserHistory } from "history";
+const history = createBrowserHistory();
 
 export const setJobViewType = (viewType) => (dispatch) =>
   dispatch({ type: types.SET_JOB_VIEW_TYPE, payload: viewType });
@@ -234,4 +236,37 @@ export const addPartner = (data, cb) => (dispatch) => {
       });
       cb && cb();
     });
+};
+
+export const AddEmail = (data,cb) => (dispatch) => {
+  dispatch({
+    type: types.ADD_EMAIL_REQUEST,
+  });
+  axios
+    .post(`${base_url}/candidate/verify/email/website?url=dtoc.tekorero.com`, data)
+    .then((res) => {
+      dispatch({
+        type: types.ADD_EMAIL_SUCCESS,
+        payload: res.data,
+      });
+      
+      message.success("Thank you for applying to this position. You will hear from us shortly.")
+  
+      cb && cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_EMAIL_FAILURE,
+        payload: err,
+      });
+      cb && cb();
+    });
+};
+
+export const handleEmailFormModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_EMAIL_FORM_MODAL,
+    payload: modalProps,
+  });
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { handleCandidateApplyModal } from "./JobAction";
+import { handleCandidateApplyModal,handleEmailFormModal } from "./JobAction";
 import moment from "moment";
 
 function Job(props) {
@@ -63,7 +63,7 @@ function Job(props) {
               type="primary"
               htmlType="submit"
               className="aply"
-              onClick={() => props.handleCandidateApplyModal(true)}
+              onClick={() => props.handleEmailFormModal(true)}
              
             >
               Apply
@@ -77,12 +77,14 @@ function Job(props) {
 }
 const mapStateToProps = ({ job }) => ({
   addCandidateApply: job.addCandidateApply,
+  addEmailformModal:job.addEmailformModal,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleCandidateApplyModal,
+      handleEmailFormModal
     },
     dispatch
   );
