@@ -42,6 +42,11 @@ const initialState = {
   countries: [],
 
   addingPartner: false,
+
+  addingEmail: false,
+  addingEmailError: false,
+  emailData:{},
+  addEmailformModal:false,
 };
 
 export const jobReducer = (state = initialState, action) => {
@@ -157,6 +162,17 @@ export const jobReducer = (state = initialState, action) => {
         ...state,
         addingPartner: false,
       };
+
+      case types.ADD_EMAIL_REQUEST:
+        return { ...state, addingEmail: true };
+      case types.ADD_EMAIL_SUCCESS:
+        return { ...state, addingEmail: false,emailData:action.payload, };
+      case types.ADD_EMAIL_FAILURE:
+        return { ...state, addingEmail: false, addingEmailError: true };   
+        
+        case types.HANDLE_EMAIL_FORM_MODAL:
+          return { ...state, addEmailformModal: action.payload };
+          
     default:
       return state;
   }
