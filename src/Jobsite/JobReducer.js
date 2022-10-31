@@ -47,6 +47,10 @@ const initialState = {
   addingEmailError: false,
   emailData:{},
   addEmailformModal:false,
+
+  fetchingJobCardDetails: false, 
+  fetchingJobCardDetailsError: false,
+  jobData:[],
 };
 
 export const jobReducer = (state = initialState, action) => {
@@ -166,13 +170,22 @@ export const jobReducer = (state = initialState, action) => {
       case types.ADD_EMAIL_REQUEST:
         return { ...state, addingEmail: true };
       case types.ADD_EMAIL_SUCCESS:
-        return { ...state, addingEmail: false,emailData:action.payload, };
+        return { ...state, 
+          addingEmail: false,
+          emailData:action.payload, };
       case types.ADD_EMAIL_FAILURE:
         return { ...state, addingEmail: false, addingEmailError: true };   
         
         case types.HANDLE_EMAIL_FORM_MODAL:
           return { ...state, addEmailformModal: action.payload };
-          
+
+          case types.GET_JOB_CARD_REQUEST:
+            return { ...state, fetchingJobCardDetails: true };
+          case types.GET_JOB_CARD_SUCCESS:
+            return { ...state, fetchingJobCardDetails: false, jobData: action.payload };
+          case types.GET_JOB_CARD_FAILURE:
+            return { ...state, fetchingJobCardDetails: false, fetchingJobCardDetailsError: true }; 
+
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Select, Icon, Tag, Switch, Checkbox } from "antd";
+import { Button, Select, Icon, Tag, Switch, Checkbox, message } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import { MainWrapper, Spacer } from "../Components/UI/Elements";
@@ -16,7 +16,8 @@ import { FlexContainer } from "../Components/UI/Layout";
 import { TextareaComponent } from "../Components/Forms/Formik/TextareaComponent";
 import { DatePicker } from "../Components/Forms/Formik/DatePicker";
 import moment from "moment";
-import {AddEmail} from "./JobAction";
+import {AddEmail,handleCandidateApplyModal} from "./JobAction";
+import CandidateJobApplyModal from "./CandidateJobApplyModal";
 class JobEmailForm extends Component {
     constructor(props) {
       super(props);
@@ -24,19 +25,27 @@ class JobEmailForm extends Component {
        
       };
     }
-    handleReset = (resetForm) => {
-      const { callback } = this.props;
-      callback && callback();
-      resetForm();
-    };
+
+    handleCallBack =(data)=>{   
+      if(data.candidateInd === false){
+      this.props.handleCandidateApplyModal(true)
+      }        
+         }
+         
+ 
     render() {
-        const {} = this.props;
+        const {
+          emailData,
+          addCandidateApply,
+          // handleCandidateApplyModal
+        } = this.props;
+ console.log(this.props.jobData && this.props.jobData.length && this.props.jobData.opportunityId);      
         return (
             <>
               <Formik
                 initialValues={{
                   emailId: "",
-                 
+                  opportunityId:this.props.opportunityId,
                 }}
                 // validationSchema={CandidateSchema}
                 onSubmit={(values, { resetForm }) => {
@@ -44,11 +53,10 @@ class JobEmailForm extends Component {
       
                   this.props.AddEmail(
                     {
-                      ...values,
-                     
+                      ...values,                     
                     },
-      
-                    () => this.handleReset(resetForm)
+      this.handleCallBack
+                    // () => this.handleReset(resetForm)
                   );
                 }}
               >
@@ -92,18 +100,29 @@ class JobEmailForm extends Component {
             </Form>
           )}
         </Formik>
+        <CandidateJobApplyModal
+        addCandidateApply={addCandidateApply}
+        handleCandidateApplyModal={this.props.handleCandidateApplyModal}
+        />
       </>
     );
   }
 }
 const mapStateToProps = ({ auth, job }) => ({
-  addingEmail:job.addingEmail
+  addingEmail:job.addingEmail,
+  emailData:job.emailData,
+  addCandidateApply:job.addCandidateApply,
+  jobData:job.jobData,
+  // opportunityId:job.jobData.opportunityId,
+  // recruitmentId:job.jobData.recruitmentId,
+
   });
   
   const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
       {
-        AddEmail
+        AddEmail,
+        handleCandidateApplyModal
       },
       dispatch
     );
