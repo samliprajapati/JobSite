@@ -27,7 +27,7 @@ import { DaysCompressorWithMonth } from "./DaysCompressorWithMonth";
 // import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
 const { Option } = Select;
 /**
- * yup validation scheme for creating a contact
+ * yup validation scheme for creating a contact  candidate/save-add/process/website
  */
 const MONTHS = [
   "Jan",

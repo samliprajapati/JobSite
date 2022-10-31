@@ -250,9 +250,10 @@ export const AddEmail = (data,cb) => (dispatch) => {
         payload: res.data,
       });
       
-      message.success("Thank you for applying to this position. You will hear from us shortly.")
+      message.success(res.data.candidateInd === false ?
+        "Thank you for applying to this position. You will hear from us shortly.":res.data.message)
   
-      cb && cb();
+      cb && cb(res.data);
     })
     .catch((err) => {
       console.log(err);
@@ -269,4 +270,27 @@ export const handleEmailFormModal = (modalProps) => (dispatch) => {
     type: types.HANDLE_EMAIL_FORM_MODAL,
     payload: modalProps,
   });
+};
+
+export const getJobCardDetails = () => (dispatch) => {
+  dispatch({
+    type: types.GET_JOB_CARD_REQUEST,
+  });
+  axios
+    .get(`${base_url}/recruitment/publish/website?url=dtoc.tekorero.com`,)
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_JOB_CARD_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JOB_CARD_FAILURE,
+        payload: err,
+      });
+    });
 };

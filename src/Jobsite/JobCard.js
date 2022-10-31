@@ -4,20 +4,22 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handleCandidateApplyModal,handleEmailFormModal } from "./JobAction";
 import moment from "moment";
+import {getJobCardDetails} from "./JobAction";
 
 function Job(props) {
-  const [jobData, setJobData] = useState([]);
+  // const [jobData, setJobData] = useState([]);
   // window.location.hostname
-  useEffect(() => {
-    fetch(
-      `https://develop.tekorero.com/employeePortal/api/v1/recruitment/publish/website?url=dtoc.tekorero.com`
-    )
-      .then((response) => response.json())
-      .then((data) => setJobData(data));
-  }, []);
-  // People.sort(dynamicSort("Name"));
+  // useEffect(() => {
+  //   fetch(
+  //     `https://develop.tekorero.com/employeePortal/api/v1/recruitment/publish/website?url=dtoc.tekorero.com`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => setJobData(data));
+  // }, []);
 
-  const data = jobData.sort((a, b) => {
+useEffect(()=>{props.getJobCardDetails()},[])
+
+  const data = props.jobData.sort((a, b) => {
     const indA = a.pingInd;
     const indB = b.pingInd;
     if (indA < indB) {
@@ -31,7 +33,7 @@ function Job(props) {
     return 0;
   });
 
-  console.log(data);
+  
   return (
     <React.Fragment>
       <div className="wrapper">
@@ -78,13 +80,15 @@ function Job(props) {
 const mapStateToProps = ({ job }) => ({
   addCandidateApply: job.addCandidateApply,
   addEmailformModal:job.addEmailformModal,
+  jobData:job.jobData,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleCandidateApplyModal,
-      handleEmailFormModal
+      handleEmailFormModal,
+      getJobCardDetails
     },
     dispatch
   );
