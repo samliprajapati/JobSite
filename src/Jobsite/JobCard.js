@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handleCandidateApplyModal,handleEmailFormModal } from "./JobAction";
 import moment from "moment";
-import {getJobCardDetails} from "./JobAction";
+import {getJobCardDetails,setCardData} from "./JobAction";
 
 function Job(props) {
   // const [jobData, setJobData] = useState([]);
@@ -65,7 +65,9 @@ useEffect(()=>{props.getJobCardDetails()},[])
               type="primary"
               htmlType="submit"
               className="aply"
-              onClick={() => props.handleEmailFormModal(true)}
+              onClick={() => {props.handleEmailFormModal(true)
+              props.setCardData(item)
+              }}
              
             >
               Apply
@@ -88,7 +90,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       handleCandidateApplyModal,
       handleEmailFormModal,
-      getJobCardDetails
+      getJobCardDetails,
+      setCardData
     },
     dispatch
   );

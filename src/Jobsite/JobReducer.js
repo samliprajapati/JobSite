@@ -51,6 +51,10 @@ const initialState = {
   fetchingJobCardDetails: false, 
   fetchingJobCardDetailsError: false,
   jobData:[],
+
+  setEditingCard:{},
+  addingCandidateProcess: false,
+  addingCandidateProcessError: false,
 };
 
 export const jobReducer = (state = initialState, action) => {
@@ -185,6 +189,16 @@ export const jobReducer = (state = initialState, action) => {
             return { ...state, fetchingJobCardDetails: false, jobData: action.payload };
           case types.GET_JOB_CARD_FAILURE:
             return { ...state, fetchingJobCardDetails: false, fetchingJobCardDetailsError: true }; 
+            
+            case types.SET_CARD_DATA:
+              return { ...state, setEditingCard: action.payload };
+             
+   case types.ADD_CANDIDATE_PROCESS_REQUEST:
+      return { ...state, addingCandidateProcess: true };
+   case types.ADD_CANDIDATE_PROCESS_SUCCESS:
+       return { ...state, addingCandidateProcess: false };
+   case types.ADD_CANDIDATE_PROCESS_FAILURE:
+       return { ...state, addingCandidateProcess: false, addingCandidateProcessError: true };
 
     default:
       return state;
