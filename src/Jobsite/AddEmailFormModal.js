@@ -4,6 +4,7 @@ import { StyledModal } from "../Components/UI/Antd";
 import JobEmailForm from "./JobEmailForm";
 
 function AddEmailFormModal (props) {
+    
     return(
         <>
         <StyledModal

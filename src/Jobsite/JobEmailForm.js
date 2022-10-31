@@ -38,14 +38,15 @@ class JobEmailForm extends Component {
           emailData,
           addCandidateApply,
           // handleCandidateApplyModal
-        } = this.props;
- console.log(this.props.jobData && this.props.jobData.length && this.props.jobData.opportunityId);      
+        } = this.props;      
         return (
             <>
               <Formik
                 initialValues={{
                   emailId: "",
-                  opportunityId:this.props.opportunityId,
+                  opportunityId:this.props.setEditingCard.opportunityId,
+                  recruitmentId:this.props.setEditingCard.recruitmentId
+
                 }}
                 // validationSchema={CandidateSchema}
                 onSubmit={(values, { resetForm }) => {
@@ -53,7 +54,9 @@ class JobEmailForm extends Component {
       
                   this.props.AddEmail(
                     {
-                      ...values,                     
+                      ...values,  
+                      opportunityId:this.props.setEditingCard.opportunityId,  
+                      recruitmentId:this.props.setEditingCard.recruitmentId
                     },
       this.handleCallBack
                     // () => this.handleReset(resetForm)
@@ -115,6 +118,7 @@ const mapStateToProps = ({ auth, job }) => ({
   jobData:job.jobData,
   // opportunityId:job.jobData.opportunityId,
   // recruitmentId:job.jobData.recruitmentId,
+  setEditingCard:job.setEditingCard,
 
   });
   

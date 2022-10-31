@@ -17,7 +17,7 @@ import { TextareaComponent } from "../Components/Forms/Formik/TextareaComponent"
 import { DatePicker } from "../Components/Forms/Formik/DatePicker";
 import moment from "moment";
 import {
-  addCandidate,
+  saveCandidateProcess,
   getSectors,
   getLibrarys,
   getIdProofs,
@@ -27,7 +27,7 @@ import { DaysCompressorWithMonth } from "./DaysCompressorWithMonth";
 // import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
 const { Option } = Select;
 /**
- * yup validation scheme for creating a contact  candidate/save-add/process/website
+ * yup validation scheme for creating a contact  
  */
 const MONTHS = [
   "Jan",
@@ -141,8 +141,8 @@ class CandidateJobApplyForm extends Component {
   render() {
     const {
       // user: { userId, firstName, lastName,department },
-      addCandidate,
-      addingCandidate,
+      saveCandidateProcess,
+      addingCandidateProcess,
       availableDate,
     } = this.props;
 
@@ -170,7 +170,7 @@ class CandidateJobApplyForm extends Component {
         value: item.departmentId,
       };
     });
-    // console.log("sec",sectorOption)
+    console.log("soid",this.props.setEditingCard.opportunityId)
     return (
       <>
         <Formik
@@ -242,15 +242,18 @@ class CandidateJobApplyForm extends Component {
                 longitude: "",
               },
             ],
-            //
+            opportunityId:this.props.setEditingCard.opportunityId,
+            recruitmentId:this.props.setEditingCard.recruitmentId
           }}
           validationSchema={CandidateSchema}
           onSubmit={(values, { resetForm }) => {
             // console.log(values,this.props.responseData&&this.props.responseData.phoneNumbers.length  ?  this.props.responseData.phoneNumbers[0] : "",);
 
-            addCandidate(
+            saveCandidateProcess(
               {
                 ...values,
+                opportunityId:this.props.setEditingCard.opportunityId,
+                recruitmentId:this.props.setEditingCard.recruitmentId
                 //     // skills: this.props.responseData ? this.props.responseData.skills : [],
                 //     skills:this.props.responseData ? this.props.responseData.skills.concat(values.skills):values.skills||[],
                 //     mobileNumber:values.mobileNumber,
@@ -281,12 +284,10 @@ class CandidateJobApplyForm extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <Form>
+            <Form >
               <Spacer />
-              <Spacer style={{ marginTop: "2em" }} />
-              <MainWrapper
-                style={{ width: "50%", margin: "auto", padding: "1em" }}
-              >
+              <div style={{ display: "flex", justifyContent: "space-between",height: "70vh", overflow:"scroll",paddingRight: "0.6em" }}>
+             
                 <Spacer />
                 <div style={{width:"100%",display:"flex", justifyContent:"space-between"}}>
                     <div style={{width:"49%",}}>
@@ -1014,15 +1015,14 @@ class CandidateJobApplyForm extends Component {
 
                     </div>
                 </div>
-                
-              </MainWrapper>
+           </div>
               <Spacer style={{margin:"1%"}}/>
               <FlexContainer justifyContent="center">
                 <Button
                   type="primary"
                   htmlType="submit"
                   // icon={<PoweroffOutlined />}
-                  Loading={addingCandidate}
+                  Loading={addingCandidateProcess}
                 >
                   Apply
                 </Button>
@@ -1040,48 +1040,22 @@ class CandidateJobApplyForm extends Component {
 }
 
 const mapStateToProps = ({ auth, job }) => ({
-  addingCandidate: job.addingCandidate,
+  addingCandidateProcess: job.addingCandidateProcess,
   sectors: job.sectors,
   librarys: job.librarys,
   idProofs: job.idProofs,
-  // organizationId: auth.userDetails.organizationId,
-  // addingCandidateError: candidate.addingCandidateError,
-  // fetchingcontacts: contact.fetchingcontacts,
-  // fetchingcontactsError: contact.fetchingcontactsError,
-  // contacts: contact.contacts,
-  // users: team.users,
-  // user: auth.userDetails,
-  // userId: auth.userDetails.userId,
-  //  department: auth.userDetails && auth.userDetails.department,
-  // partnerLogin: auth.userDetails && auth.userDetails.partnerLogin,
-  // creatorName: opportunity.opportunity.creatorName,
-  // creatorId: opportunity.opportunity.creatorId,
-  // accountName:
-  //   opportunity.opportunity &&
-  //   opportunity.opportunity.metaData &&
-  //   opportunity.opportunity.metaData.account &&
-  //   opportunity.opportunity.metaData.account.accountName,
-  // accountIdTag:
-  //   opportunity.opportunity &&
-  //   opportunity.opportunity.metaData &&
-  //   opportunity.opportunity.metaData.account &&
-  //   opportunity.opportunity.metaData.account.accountId,
-  // currencies: auth.currencies,
   departments: job.departments,
+  setEditingCard:job.setEditingCard,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addCandidate,
+      saveCandidateProcess,
       getLibrarys,
       getSectors,
       getIdProofs,
       getDepartments
-      // getAllPartnerListByUserId,
-      // getContactById,
-      // addLinkContactByOpportunityId,
-      // getCurrency,
     },
     dispatch
   );

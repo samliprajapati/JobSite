@@ -294,3 +294,34 @@ export const getJobCardDetails = () => (dispatch) => {
       });
     });
 };
+
+export const setCardData = (name) => (dispatch) => {
+  dispatch({
+    type: types.SET_CARD_DATA,
+    payload: name,
+  });
+};
+
+export const saveCandidateProcess = (data, cb) => (dispatch) => {
+  dispatch({
+    type: types.ADD_CANDIDATE_PROCESS_REQUEST,
+  });
+  axios
+    .post(`${base_url}/candidate/save-add/process/website?url=dtoc.tekorero.com`, data)
+    .then((res) => {
+      dispatch({
+        type: types.ADD_CANDIDATE_PROCESS_SUCCESS,
+        payload: res.data,
+      });
+      message.success(res.data.message)
+      cb && cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_CANDIDATE_PROCESS_FAILURE,
+        payload: err,
+      });
+      cb && cb();
+    });
+};
