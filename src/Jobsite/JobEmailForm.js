@@ -45,7 +45,8 @@ class JobEmailForm extends Component {
                 initialValues={{
                   emailId: "",
                   opportunityId:this.props.setEditingCard.opportunityId,
-                  recruitmentId:this.props.setEditingCard.recruitmentId
+                  recruitmentId:this.props.setEditingCard.recruitmentId,
+                  recruitmentProcessId:this.props.setEditingCard.recruitmentProcessId
 
                 }}
                 // validationSchema={CandidateSchema}
@@ -56,7 +57,8 @@ class JobEmailForm extends Component {
                     {
                       ...values,  
                       opportunityId:this.props.setEditingCard.opportunityId,  
-                      recruitmentId:this.props.setEditingCard.recruitmentId
+                      recruitmentId:this.props.setEditingCard.recruitmentId,
+                      recruitmentProcessId:this.props.setEditingCard.recruitmentProcessId
                     },
       this.handleCallBack
                     // () => this.handleReset(resetForm)

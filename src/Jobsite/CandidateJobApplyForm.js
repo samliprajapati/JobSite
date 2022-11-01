@@ -243,7 +243,8 @@ class CandidateJobApplyForm extends Component {
               },
             ],
             opportunityId:this.props.setEditingCard.opportunityId,
-            recruitmentId:this.props.setEditingCard.recruitmentId
+            recruitmentId:this.props.setEditingCard.recruitmentId,
+            recruitmentProcessId:this.props.setEditingCard.recruitmentProcessId
           }}
           validationSchema={CandidateSchema}
           onSubmit={(values, { resetForm }) => {
@@ -253,7 +254,8 @@ class CandidateJobApplyForm extends Component {
               {
                 ...values,
                 opportunityId:this.props.setEditingCard.opportunityId,
-                recruitmentId:this.props.setEditingCard.recruitmentId
+                recruitmentId:this.props.setEditingCard.recruitmentId,
+                recruitmentProcessId:this.props.setEditingCard.recruitmentProcessId
                 //     // skills: this.props.responseData ? this.props.responseData.skills : [],
                 //     skills:this.props.responseData ? this.props.responseData.skills.concat(values.skills):values.skills||[],
                 //     mobileNumber:values.mobileNumber,
@@ -1028,9 +1030,6 @@ class CandidateJobApplyForm extends Component {
                 </Button>
                     </FlexContainer>
 
-              
-
-             
             </Form>
           )}
         </Formik>
