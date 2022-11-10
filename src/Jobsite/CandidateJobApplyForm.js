@@ -191,13 +191,11 @@ class CandidateJobApplyForm extends Component {
             definationId: [],
             countryDialCode: "",
             phoneNumber: "",
-            // mobileNumber: "", phoneNumbers
             mobileNumber: "",
             countryDialCode1: "",
-            emailId: "",
+            emailId: this.props.emailData.email,
             documentId: "",
-            // emailId:"",
-            // designation: "",
+           
             linkedin: "",
             designationTypeId: "",
             departmentId: "",
@@ -1044,6 +1042,7 @@ const mapStateToProps = ({ auth, job }) => ({
   librarys: job.librarys,
   idProofs: job.idProofs,
   departments: job.departments,
+  emailData:job.emailData,
   setEditingCard:job.setEditingCard,
 });
 
