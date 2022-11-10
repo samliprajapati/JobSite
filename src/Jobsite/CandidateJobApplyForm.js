@@ -191,13 +191,11 @@ class CandidateJobApplyForm extends Component {
             definationId: [],
             countryDialCode: "",
             phoneNumber: "",
-            // mobileNumber: "", phoneNumbers
             mobileNumber: "",
             countryDialCode1: "",
-            emailId: "",
+            emailId: this.props.emailData.email,
             documentId: "",
-            // emailId:"",
-            // designation: "",
+           
             linkedin: "",
             designationTypeId: "",
             departmentId: "",
@@ -243,7 +241,8 @@ class CandidateJobApplyForm extends Component {
               },
             ],
             opportunityId:this.props.setEditingCard.opportunityId,
-            recruitmentId:this.props.setEditingCard.recruitmentId
+            recruitmentId:this.props.setEditingCard.recruitmentId,
+            recruitmentProcessId:this.props.setEditingCard.recruitmentProcessId
           }}
           validationSchema={CandidateSchema}
           onSubmit={(values, { resetForm }) => {
@@ -253,7 +252,8 @@ class CandidateJobApplyForm extends Component {
               {
                 ...values,
                 opportunityId:this.props.setEditingCard.opportunityId,
-                recruitmentId:this.props.setEditingCard.recruitmentId
+                recruitmentId:this.props.setEditingCard.recruitmentId,
+                recruitmentProcessId:this.props.setEditingCard.recruitmentProcessId
                 //     // skills: this.props.responseData ? this.props.responseData.skills : [],
                 //     skills:this.props.responseData ? this.props.responseData.skills.concat(values.skills):values.skills||[],
                 //     mobileNumber:values.mobileNumber,
@@ -1028,9 +1028,6 @@ class CandidateJobApplyForm extends Component {
                 </Button>
                     </FlexContainer>
 
-              
-
-             
             </Form>
           )}
         </Formik>
@@ -1045,6 +1042,7 @@ const mapStateToProps = ({ auth, job }) => ({
   librarys: job.librarys,
   idProofs: job.idProofs,
   departments: job.departments,
+  emailData:job.emailData,
   setEditingCard:job.setEditingCard,
 });
 

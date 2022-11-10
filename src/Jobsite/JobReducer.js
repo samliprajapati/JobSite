@@ -196,7 +196,7 @@ export const jobReducer = (state = initialState, action) => {
    case types.ADD_CANDIDATE_PROCESS_REQUEST:
       return { ...state, addingCandidateProcess: true };
    case types.ADD_CANDIDATE_PROCESS_SUCCESS:
-       return { ...state, addingCandidateProcess: false };
+       return { ...state, addingCandidateProcess: false, addCandidateApply: false };
    case types.ADD_CANDIDATE_PROCESS_FAILURE:
        return { ...state, addingCandidateProcess: false, addingCandidateProcessError: true };
 
